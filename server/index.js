@@ -3,8 +3,11 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import processorRouter from "./routes/processor.js";
+import dotenv from "dotenv";
 
-const CONNECTION_URL = "mongodb+srv://jlee7772:Leeboxer44!@cluster0.cczj9.mongodb.net/Products?retryWrites=true&w=majority";
+dotenv.config();
+
+const CONNECTION_URL = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5000;
 const app = express();
 

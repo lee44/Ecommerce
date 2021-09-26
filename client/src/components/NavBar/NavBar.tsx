@@ -1,42 +1,48 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
-import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
-import useStyles from "./styles";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import SettingsIcon from "@mui/icons-material/Settings";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Search, SearchIconWrapper, StyledInputBase, StyledLogo } from "./styles";
 
 function NavBar() {
-	const classes = useStyles();
-
 	return (
-		<div className={classes.root}>
+		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position="static">
 				<Toolbar>
-					<IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="open drawer">
+					<IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
 						<MenuIcon />
 					</IconButton>
-					<Typography className={classes.title} variant="h6" noWrap>
-						Ecommerce
-					</Typography>
-					<div className={classes.search}>
-						<div className={classes.searchIcon}>
+					<StyledLogo src={process.env.PUBLIC_URL + "assets/logo.png"}></StyledLogo>
+					<Search>
+						<SearchIconWrapper>
 							<SearchIcon />
-						</div>
-						<InputBase
-							placeholder="Search…"
-							classes={{
-								root: classes.inputRoot,
-								input: classes.inputInput,
-							}}
-							inputProps={{ "aria-label": "search" }}
-						/>
-					</div>
+						</SearchIconWrapper>
+						<StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
+					</Search>
+					<Box>
+						<IconButton size="large" color="inherit">
+							<AccountCircleIcon></AccountCircleIcon>
+						</IconButton>
+					</Box>
+					<Box>
+						<IconButton size="large" color="inherit">
+							<ShoppingCartIcon></ShoppingCartIcon>
+						</IconButton>
+					</Box>
+					<Box>
+						<IconButton size="large" color="inherit">
+							<SettingsIcon></SettingsIcon>
+						</IconButton>
+					</Box>
 				</Toolbar>
 			</AppBar>
-		</div>
+		</Box>
 	);
 }
 
