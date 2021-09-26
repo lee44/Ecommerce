@@ -1,6 +1,5 @@
 import React from "react";
-import i9 from "../../assets/i9.jpg";
-import { Card, CardContent, CardMedia, Container, Grid, Link, Paper, Stack, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, Grid, Link, Stack, Typography } from "@mui/material";
 
 type ShoppingProps = {
 	category: String;
@@ -19,15 +18,13 @@ const ShoppingGrid = (props: ShoppingProps) => {
 						{props.category}
 					</Typography>
 					<Stack spacing={1}>
-						<Link href={`/results/${props.url_parameter[0]}`} color="inherit" underline="hover">
-							{props.subCategory[0]}
-						</Link>
-						<Link href={`/results/${props.url_parameter[1]}`} color="inherit" underline="hover">
-							{props.subCategory[1]}
-						</Link>
-						<Link href={`/results/${props.url_parameter[2]}`} color="inherit" underline="hover">
-							{props.subCategory[2]}
-						</Link>
+						{props.url_parameter.map((url_parameter, index) => {
+							return (
+								<Link key={index} href={`/results/${url_parameter}`} color="inherit" underline="hover">
+									{props.subCategory[index]}
+								</Link>
+							);
+						})}
 					</Stack>
 				</CardContent>
 			</Card>
