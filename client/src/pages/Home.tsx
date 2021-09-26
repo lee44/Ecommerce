@@ -11,9 +11,9 @@ function Home() {
 	return (
 		<>
 			<Carousel axis="horizontal" infiniteLoop={true} showThumbs={false} showStatus={false}>
-				{carouselSlides.map((slide) => {
+				{carouselSlides.map((slide, index) => {
 					return (
-						<div>
+						<div key={index}>
 							<img alt="first_slide" src={process.env.PUBLIC_URL + `assets/carouselSlides/${slide.images_src}`} />
 						</div>
 					);
@@ -23,8 +23,16 @@ function Home() {
 				<Box sx={{ padding: 3, marginTop: 5, border: 1, borderColor: "grey.300", borderRadius: 1, textAlign: "left" }}>
 					<Typography variant="h4">Shop PC Components</Typography>
 					<Grid container spacing={1} sx={{ marginTop: 1, marginBottom: 1 }}>
-						{shoppingGridItems.map((item) => {
-							return <ShoppingGrid category={item.category} subCategory={item.subCategory} url_parameter={item.url_parameter} image_src={item.image_src} />;
+						{shoppingGridItems.map((item, index) => {
+							return (
+								<ShoppingGrid
+									key={index}
+									category={item.category}
+									subCategory={item.subCategory}
+									url_parameter={item.url_parameter}
+									image_src={item.image_src}
+								/>
+							);
 						})}
 					</Grid>
 				</Box>

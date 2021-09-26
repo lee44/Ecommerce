@@ -9,6 +9,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Search, SearchIconWrapper, StyledInputBase, StyledLogo } from "./styles";
+import logo from "../../logo.png";
 
 function NavBar() {
 	return (
@@ -18,7 +19,7 @@ function NavBar() {
 					<IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
 						<MenuIcon />
 					</IconButton>
-					<StyledLogo src={process.env.PUBLIC_URL + "assets/logo.png"}></StyledLogo>
+					<StyledLogo src={logo}></StyledLogo>
 					<Search>
 						<SearchIconWrapper>
 							<SearchIcon />
