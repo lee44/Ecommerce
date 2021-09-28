@@ -4,12 +4,12 @@ import type { Product } from "./api";
 
 type productState = {
 	result: Product[];
-	loading: "idle" | "pending" | "fulfilled" | "rejected";
+	status: "idle" | "pending" | "fulfilled" | "rejected";
 };
 
 const initialState: productState = {
 	result: [],
-	loading: "idle",
+	status: "idle",
 };
 
 const productSlice = createSlice({
@@ -18,14 +18,14 @@ const productSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(fetchProducts.pending, (state, action) => {
-			state.loading = "pending";
+			state.status = "pending";
 		});
 		builder.addCase(fetchProducts.fulfilled, (state, { payload }) => {
-			state.loading = "fulfilled";
+			state.status = "fulfilled";
 			state.result = payload;
 		});
 		builder.addCase(fetchProducts.rejected, (state, action) => {
-			state.loading = "rejected";
+			state.status = "rejected";
 		});
 	},
 });

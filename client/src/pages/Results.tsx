@@ -5,10 +5,15 @@ import Filter from "../components/Filter/Filter";
 import { ResultGrid } from "../components/ResultGrid/ResultGrid";
 import { useAppDispatch } from "../redux/hooks";
 import { fetchProducts } from "../redux/api";
+import { useAppSelector } from "../redux/hooks";
+import ProgressCircle from "../components/ProgressCircle/ProgressCircle";
 
 const Results = () => {
 	let { category } = useParams<{ category?: string }>();
 	const dispatch = useAppDispatch();
+	const productsLoading = useAppSelector((state) => {
+		return state.products.status;
+	});
 
 	useEffect(() => {
 		dispatch(fetchProducts("http://localhost:5000/api/processors"));
@@ -20,7 +25,7 @@ const Results = () => {
 				<Filter />
 			</Grid>
 			<Grid item xs={12} sm={8} md={9} lg={10}>
-				<ResultGrid />
+				{productsLoading === "idle" ? <ProgressCircle /> : <ResultGrid />}
 			</Grid>
 		</Grid>
 	);
