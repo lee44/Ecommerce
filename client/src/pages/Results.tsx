@@ -1,11 +1,18 @@
 import { Container, Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Filter from "../components/Filter/Filter";
 import { ResultGrid } from "../components/ResultGrid/ResultGrid";
+import { useAppDispatch } from "../redux/hooks";
+import { fetchProducts } from "../redux/api";
 
 const Results = () => {
 	let { category } = useParams<{ category?: string }>();
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		dispatch(fetchProducts("http://localhost:5000/api/processors"));
+	}, []);
 
 	return (
 		<Grid container spacing={1} sx={{ marginTop: 1, marginBottom: 1 }}>
