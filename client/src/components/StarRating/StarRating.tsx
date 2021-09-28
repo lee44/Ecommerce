@@ -1,12 +1,16 @@
 import { Rating, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
-const StarRating = () => {
+type Stars = {
+	rating: number;
+	reviews: number;
+};
+const StarRating = (props: Stars) => {
 	return (
 		<Box sx={{ display: "flex", alignItems: "center" }}>
-			<Rating name="read-only" value={2} readOnly />
+			<Rating name="read-only" value={props.rating} readOnly />
 			<Box sx={{ ml: 1 }}>
-				<Typography>(1000)</Typography>
+				<Typography>({props.reviews})</Typography>
 			</Box>
 		</Box>
 	);
