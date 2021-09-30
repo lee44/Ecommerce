@@ -12,7 +12,7 @@ export const ResultGrid = () => {
 			<Grid container spacing={1} sx={{ marginTop: 1, marginBottom: 1 }}>
 				{products.map((product) => {
 					return (
-						<Grid item xs={12} md={6} lg={3}>
+						<Grid key={product._id} item xs={12} md={6} lg={3}>
 							<ResultGridItems {...product} />
 						</Grid>
 					);

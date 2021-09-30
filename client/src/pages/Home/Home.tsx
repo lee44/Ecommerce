@@ -1,11 +1,11 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import ShoppingGrid from "../components/ShoppingGrid/ShoppingGrid";
+import ShoppingGrid from "../../components/ShoppingGrid/ShoppingGrid";
 import { Container, Typography, Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import { shoppingGridItems } from "../config/shoppingGridItems";
-import { carouselSlides } from "../config/carouselSlides";
+import { shoppingGridItems } from "../../config/shoppingGridItems";
+import { carouselSlides } from "../../config/carouselSlides";
 
 function Home() {
 	return (
