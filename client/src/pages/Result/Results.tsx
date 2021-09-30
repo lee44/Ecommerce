@@ -1,15 +1,14 @@
 import { Container, Grid } from "@mui/material";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Filter from "../components/Filter/Filter";
-import { ResultGrid } from "../components/ResultGrid/ResultGrid";
-import { useAppDispatch } from "../redux/hooks";
-import { fetchProducts } from "../redux/api";
-import { useAppSelector } from "../redux/hooks";
-import ProgressCircle from "../components/ProgressCircle/ProgressCircle";
+import Filter from "../../components/Filter/Filter";
+import { ResultGrid } from "../../components/ResultGrid/ResultGrid";
+import { useAppDispatch } from "../../redux/hooks";
+import { fetchProducts } from "../../redux/api";
+import { useAppSelector } from "../../redux/hooks";
+import ProgressCircle from "../../components/ProgressCircle/ProgressCircle";
 
 const Results = () => {
-	let { category } = useParams<{ category?: string }>();
 	const dispatch = useAppDispatch();
 	const productsLoading = useAppSelector((state) => {
 		return state.products.status;

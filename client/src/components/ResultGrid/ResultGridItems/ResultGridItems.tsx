@@ -7,8 +7,18 @@ import Typography from "@mui/material/Typography";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StarRating from "../../StarRating/StarRating";
 import type { Product } from "../../../redux/api";
+import { useHistory, useLocation, useParams } from "react-router";
 
 const ResultGridItems = (props: Product) => {
+	let history = useHistory();
+	let location = useLocation();
+
+	const handleCartClick = () => {};
+
+	const handleDetailClick = () => {
+		history.push(`${location.pathname}/${props._id}`);
+	};
+
 	return (
 		<Card>
 			<CardMedia sx={{ height: 150, objectFit: "contain" }} component="img" alt="product_image" image={`data:image/jpeg;base64,${props.image}`} />
@@ -20,10 +30,10 @@ const ResultGridItems = (props: Product) => {
 				<Typography variant="h6">${props.price}</Typography>
 			</CardContent>
 			<CardActions sx={{ justifyContent: "center" }}>
-				<Button variant="contained" size="large" startIcon={<ShoppingCartIcon />}>
+				<Button variant="contained" size="large" startIcon={<ShoppingCartIcon />} onClick={handleCartClick}>
 					Add To Cart
 				</Button>
-				<Button variant="contained" size="large">
+				<Button variant="contained" size="large" onClick={handleDetailClick}>
 					Details
 				</Button>
 			</CardActions>
