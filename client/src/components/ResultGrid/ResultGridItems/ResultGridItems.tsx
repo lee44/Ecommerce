@@ -21,7 +21,7 @@ const ResultGridItems = (props: Product) => {
 
 	return (
 		<Card>
-			<CardMedia sx={{ height: 150, objectFit: "contain" }} component="img" alt="product_image" image={`${props.image}`} />
+			<CardMedia sx={{ height: 150, objectFit: "contain" }} component="img" alt="product_image" image={props.image[Math.floor(Math.random() * 3)]} />
 			<CardContent sx={{ display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "start" }}>
 				<StarRating rating={props.stars} reviews={props.reviews} />
 				<Typography gutterBottom variant="h5">

@@ -1,12 +1,10 @@
-import { Container, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import Filter from "../../components/Filter/Filter";
-import { ResultGrid } from "../../components/ResultGrid/ResultGrid";
-import { useAppDispatch } from "../../redux/hooks";
-import { fetchProducts } from "../../redux/api";
-import { useAppSelector } from "../../redux/hooks";
 import ProgressCircle from "../../components/ProgressCircle/ProgressCircle";
+import { ResultGrid } from "../../components/ResultGrid/ResultGrid";
+import { fetchProducts } from "../../redux/api";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 const Results = () => {
 	const dispatch = useAppDispatch();
