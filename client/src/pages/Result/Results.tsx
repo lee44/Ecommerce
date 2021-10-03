@@ -14,7 +14,7 @@ const Results = () => {
 
 	useEffect(() => {
 		dispatch(fetchProducts("http://localhost:5000/api/processors"));
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<Grid container spacing={1} sx={{ marginTop: 1, marginBottom: 1 }}>

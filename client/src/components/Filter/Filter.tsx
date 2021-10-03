@@ -1,5 +1,4 @@
-import React from "react";
-import { Checkbox, Container, Divider, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Stack, Switch, Typography } from "@mui/material";
+import { Checkbox, Divider, FormControlLabel, FormGroup, FormLabel, Stack, Switch } from "@mui/material";
 import { Box } from "@mui/system";
 
 const Filter = () => {
