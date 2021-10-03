@@ -1,17 +1,18 @@
 import { Container, Typography } from "@mui/material";
+import type { Product } from "../../redux/api";
 import BulletDetails from "../BulletDetails/BulletDetails";
 import LineBreak from "../LineBreak/LineBreak";
 import StarRating from "../StarRating/StarRating";
 
-export const Description = () => {
+export const Description = (props: Product) => {
 	return (
 		<Container maxWidth="xl">
 			<Typography variant="h5" textAlign="start">
-				AMD Ryzen Threadripper PRO 3955WX - Ryzen Threadripper PRO Castle Peak (Zen 2) 16-Core 3.9 GHz Socket sWRX8 280W Desktop Processor - 100-100000167WOF
+				{props.name}
 			</Typography>
-			<StarRating rating={3} reviews={100} />
+			<StarRating rating={props.stars} reviews={props.reviews} />
 			<LineBreak />
-			<BulletDetails />
+			<BulletDetails details={props.details} />
 		</Container>
 	);
 };

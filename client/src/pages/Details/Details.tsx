@@ -13,26 +13,22 @@ const Details = () => {
 	const products = useAppSelector((state) => {
 		return state.products.result.find((product) => product._id === id);
 	});
-	console.log(products);
-
 	return (
 		<Container maxWidth="xl">
 			<Grid container spacing={1} sx={{ marginTop: 1, marginBottom: 1 }}>
 				<Grid item xs={12} sm={4} md={3}>
 					<StyleCarousel showStatus={false} showIndicators={false} showArrows={false}>
-						<div>
-							<img src={`http://localhost:3000/assets/shoppingGridItems/case.png`} />
-						</div>
-						<div>
-							<img src={`http://localhost:3000/assets/shoppingGridItems/cpu.png`} />
-						</div>
-						<div>
-							<img src={`http://localhost:3000/assets/shoppingGridItems/storage.png`} />
-						</div>
+						{products?.image.map((url, index) => {
+							return (
+								<div key={index}>
+									<img src={url} alt="product_image" />
+								</div>
+							);
+						})}
 					</StyleCarousel>
 				</Grid>
 				<Grid item xs={12} sm={8} md={6}>
-					<Description />
+					{products ? <Description {...products} /> : ""}
 				</Grid>
 				<Grid item xs={12} sm={4} md={3}>
 					<PurchaseOptions />

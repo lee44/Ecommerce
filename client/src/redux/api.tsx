@@ -16,8 +16,8 @@ export type Product = {
 	stars: number;
 	release_date: Date;
 	best_sellers: [{ seller: string; price: number; ratings: number; pos_review_percent: number }];
-	image: [string];
-	details: [string];
+	image: string[];
+	details: string[];
 };
 
 export const fetchProducts = createAsyncThunk("fetch/products", async (url: string): Promise<Product[]> => {
