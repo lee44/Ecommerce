@@ -7,7 +7,7 @@ import StarRating from "../StarRating/StarRating";
 export const Description = (props: Product) => {
 	return (
 		<Container maxWidth="xl">
-			<Typography variant="h5" textAlign="start">
+			<Typography variant="h1" textAlign="start">
 				{props.name}
 			</Typography>
 			<StarRating rating={props.stars} reviews={props.reviews} />

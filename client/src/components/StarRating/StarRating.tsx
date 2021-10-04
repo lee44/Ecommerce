@@ -10,7 +10,7 @@ const StarRating = (props: Stars) => {
 		<Box sx={{ display: "flex", alignItems: "center", my: 2 }}>
 			<Rating name="read-only" value={props.rating} readOnly />
 			<Box sx={{ ml: 1 }}>
-				<Typography>({props.reviews})</Typography>
+				<Typography variant="h3">({props.reviews})</Typography>
 			</Box>
 		</Box>
 	);

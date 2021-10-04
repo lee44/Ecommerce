@@ -34,22 +34,22 @@ const PurchaseOptions = (props: Product) => {
 						/>
 					</RadioGroup>
 				</FormControl>
-				<Typography sx={{ my: 2 }} variant="subtitle1" textAlign="start">
+				<Typography sx={{ my: 2 }} variant="h4" textAlign="start">
 					Sold by: Newegg
 				</Typography>
-				<Typography variant="subtitle1" textAlign="start">
+				<Typography variant="h4" textAlign="start">
 					FREE Delivery: Sep 22
 				</Typography>
 				<LineBreak />
-				<Typography variant="h4" fontWeight="bold" textAlign="start">
+				<Typography variant="h2" fontWeight="bold" textAlign="start">
 					${props.price}
 				</Typography>
 				<Grid container sx={{ my: 2 }} columnSpacing="10">
-					<Grid item xs={12} sm={3}>
-						<TextField type="number" size="medium" />
+					<Grid item xs={12} sm={4}>
+						<TextField type="number" size="medium" sx={{ "& input": { padding: "14px 8px 14px 26px", minWidth: 35 } }} defaultValue="0" />
 					</Grid>
-					<Grid item xs={12} sm={9}>
-						<Button sx={{ fontWeight: "bold", fontSize: "h6.fontSize" }} size="large" variant="contained" color="secondary" fullWidth>
+					<Grid item xs={12} sm={8}>
+						<Button sx={{ fontWeight: "bold", fontSize: "h3.fontSize" }} size="large" variant="contained" color="secondary" fullWidth>
 							CHECKOUT
 						</Button>
 					</Grid>

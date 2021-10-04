@@ -20,7 +20,7 @@ function Home() {
 			</Carousel>
 			<Container sx={{ paddingBottom: 5 }}>
 				<Box sx={{ padding: 3, marginTop: 5, border: 1, borderColor: "grey.300", borderRadius: 1, textAlign: "left" }}>
-					<Typography variant="h4">Shop PC Components</Typography>
+					<Typography variant="h1">Shop PC Components</Typography>
 					<Grid container spacing={1} sx={{ marginTop: 1, marginBottom: 1 }}>
 						{shoppingGridItems.map((item, index) => {
 							return (
