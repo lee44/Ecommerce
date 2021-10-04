@@ -1,5 +1,5 @@
-import React from "react";
 import { Card, CardContent, CardMedia, Grid, Link, Stack, Typography } from "@mui/material";
+import React from "react";
 
 type ShoppingProps = {
 	category: String;
@@ -14,7 +14,7 @@ const ShoppingGrid = (props: ShoppingProps) => {
 			<Card sx={{ display: "flex", padding: 2, justifyContent: "center", alignItems: "center" }}>
 				<CardMedia component="img" sx={{ width: 100 }} image={process.env.PUBLIC_URL + `assets/shoppingGridItems/${props.image_src}`} alt="category_image" />
 				<CardContent>
-					<Typography component="div" variant="h6">
+					<Typography component="div" variant="h2">
 						{props.category}
 					</Typography>
 					<Stack spacing={1}>

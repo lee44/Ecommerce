@@ -15,7 +15,7 @@ const BulletDetails = (props: DetailType) => {
 							<StyledListItemIcon>
 								<CircleIcon sx={{ fontSize: 10 }} color="primary"></CircleIcon>
 							</StyledListItemIcon>
-							<Typography variant="subtitle1">{detail}</Typography>
+							<Typography variant="h4">{detail}</Typography>
 						</ListItem>
 					);
 				})}
