@@ -7,30 +7,35 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { useHistory, useLocation } from "react-router";
 import type { Product } from "../../../redux/api";
+import { addToCart } from "../../../redux/cartSlice";
+import { useAppDispatch } from "../../../redux/hooks";
 import StarRating from "../../StarRating/StarRating";
 
 const ResultGridItems = (props: Product) => {
 	let history = useHistory();
 	let location = useLocation();
+	const dispatch = useAppDispatch();
 
-	const handleCartClick = () => {};
+	const handleCartClick = (id: string) => {
+		dispatch(addToCart(id));
+	};
 
 	const handleDetailClick = () => {
 		history.push(`${location.pathname}/${props._id}`);
 	};
 
 	return (
-		<Card>
+		<Card variant="outlined">
 			<CardMedia sx={{ height: 150, objectFit: "contain" }} component="img" alt="product_image" image={props.image[Math.floor(Math.random() * 3)]} />
 			<CardContent sx={{ display: "flex", flexDirection: "column", justifyContent: "space-evenly", alignItems: "start" }}>
 				<StarRating rating={props.stars} reviews={props.reviews} />
-				<Typography gutterBottom variant="h2">
+				<Typography gutterBottom variant="h2" sx={{ fontWeight: "medium" }}>
 					{props.name}
 				</Typography>
 				<Typography variant="h3">${props.price}</Typography>
 			</CardContent>
 			<CardActions sx={{ justifyContent: "center" }}>
-				<Button variant="contained" size="large" startIcon={<ShoppingCartIcon />} onClick={handleCartClick}>
+				<Button variant="contained" size="large" startIcon={<ShoppingCartIcon />} onClick={() => handleCartClick(props._id)}>
 					Add To Cart
 				</Button>
 				<Button variant="contained" size="large" onClick={handleDetailClick}>

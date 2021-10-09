@@ -1,17 +1,22 @@
-import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Search, SearchIconWrapper, StyledInputBase, StyledLogo } from "./styles";
+import { Badge } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import React from "react";
 import logo from "../../logo.png";
+import { getMemoizedNumItems } from "../../redux/cartSlice";
+import { useAppSelector } from "../../redux/hooks";
+import { Search, SearchIconWrapper, StyledInputBase, StyledLogo } from "./styles";
 
 function NavBar() {
+	const numItems = useAppSelector(getMemoizedNumItems);
+
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position="static">
@@ -32,9 +37,9 @@ function NavBar() {
 						</IconButton>
 					</Box>
 					<Box>
-						<IconButton size="large" color="inherit">
+						<Badge badgeContent={numItems} color="secondary">
 							<ShoppingCartIcon></ShoppingCartIcon>
-						</IconButton>
+						</Badge>
 					</Box>
 					<Box>
 						<IconButton size="large" color="inherit">
