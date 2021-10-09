@@ -5,6 +5,10 @@ const processorSchema = mongoose.Schema({
 		type: String,
 		required: [true, "name must be provided"],
 	},
+	full_name: {
+		type: String,
+		required: [true, "name must be provided"],
+	},
 	cores: {
 		type: Number,
 		required: [true, "cores must be provided"],

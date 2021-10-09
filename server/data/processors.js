@@ -1,6 +1,7 @@
 ﻿export const processorData = [
 	{
 		name: "Ryzen 5 3600",
+		full_name: "AMD Ryzen 5 3rd Gen - RYZEN 5 3600 Matisse (Zen 2) 6-Core 3.6 GHz (4.2 GHz Max Boost) Socket AM4 65W 100-100000031BOX Desktop Processor",
 		cores: "6",
 		base_clock: "3.6",
 		boost_clock: "4.2",
@@ -35,6 +36,7 @@
 	},
 	{
 		name: "Ryzen 7 5800X",
+		full_name: "AMD Ryzen 7 5800X - Ryzen 7 5000 Series Vermeer (Zen 3) 8-Core 3.8 GHz Socket AM4 105W Desktop Processor - 100-100000063WOF",
 		cores: "8",
 		base_clock: "3.8",
 		boost_clock: "4.7",
@@ -59,6 +61,7 @@
 	},
 	{
 		name: "Core i5-10400",
+		full_name: "Intel Core i5-10400 - Core i5 10th Gen Comet Lake 6-Core 2.9 GHz LGA 1200 65W Intel UHD Graphics 630 Desktop Processor - BX8070110400",
 		cores: "6",
 		base_clock: "2.9",
 		boost_clock: "4.3",
@@ -91,6 +94,7 @@
 	},
 	{
 		name: "Ryzen 9 5900X",
+		full_name: "AMD Ryzen 9 5900X - Ryzen 9 5000 Series Vermeer (Zen 3) 12-Core 3.7 GHz Socket AM4 105W Desktop Processor - 100-100000061WOF",
 		cores: "12",
 		base_clock: "3.7",
 		boost_clock: "4.8",
@@ -116,6 +120,8 @@
 	},
 	{
 		name: "Ryzen 3 3200G",
+		full_name:
+			"AMD Ryzen 3 2nd Gen with Radeon Graphics - RYZEN 3 3200G Picasso (Zen+) 4-Core 3.6 GHz (4.0 GHz Max Boost) Socket AM4 65W YD3200C5FHBOX Desktop Processor",
 		cores: "4",
 		base_clock: "3.6",
 		boost_clock: "4",
@@ -149,6 +155,7 @@
 	},
 	{
 		name: "Core i3-10105F",
+		full_name: "Intel Core i3-10105F - Core i3 10th Gen Comet Lake Quad-Core 3.7 GHz LGA 1200 65W Desktop Processor - BX8070110105F",
 		cores: "4",
 		base_clock: "3.7",
 		boost_clock: "4.4",
@@ -174,6 +181,7 @@
 	},
 	{
 		name: "Core i9-11900K",
+		full_name: "Intel Core i9-11900K - Core i9 11th Gen Rocket Lake 8-Core 3.5 GHz LGA 1200 125W Intel UHD Graphics 750 Desktop Processor - BX8070811900K",
 		cores: "8",
 		base_clock: "3.5",
 		boost_clock: "5.3",
@@ -199,6 +207,7 @@
 	},
 	{
 		name: "Core i7-11700K",
+		full_name: "Intel Core i7-11700K - Core i7 11th Gen Rocket Lake 8-Core 3.6 GHz LGA 1200 125W Intel UHD Graphics 750 Desktop Processor - BX8070811700K",
 		cores: "8",
 		base_clock: "3.6",
 		boost_clock: "5",
@@ -224,6 +233,7 @@
 	},
 	{
 		name: "Core i3-10100",
+		full_name: "Intel Core i3-10100 - Core i3 10th Gen Comet Lake Quad-Core 3.6 GHz LGA 1200 65W Intel UHD Graphics 630 Desktop Processor - BX8070110100",
 		cores: "4",
 		base_clock: "3.6",
 		boost_clock: "4.3",
@@ -249,6 +259,8 @@
 	},
 	{
 		name: "Ryzen Threadripper 3990X",
+		full_name:
+			"AMD Ryzen Threadripper 3990X - Ryzen Threadripper 3rd Gen Castle Peak (Zen 2) 64-Core 2.9 GHz Socket sTRX4 280W Desktop Processor - 100-100000163WOF",
 		cores: "64",
 		base_clock: "2.9",
 		boost_clock: "4.3",

@@ -8,7 +8,7 @@ export const Description = (props: Product) => {
 	return (
 		<Container maxWidth="xl">
 			<Typography variant="h1" textAlign="start">
-				{props.name}
+				{props.full_name}
 			</Typography>
 			<StarRating rating={props.stars} reviews={props.reviews} />
 			<LineBreak />
