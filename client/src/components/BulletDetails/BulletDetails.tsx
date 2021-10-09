@@ -11,7 +11,7 @@ const BulletDetails = (props: DetailType) => {
 			<List>
 				{props.details.map((detail, index) => {
 					return (
-						<ListItem key={index} disablePadding>
+						<ListItem key={index} disablePadding sx={{ my: 1 }}>
 							<StyledListItemIcon>
 								<CircleIcon sx={{ fontSize: 10 }} color="primary"></CircleIcon>
 							</StyledListItemIcon>

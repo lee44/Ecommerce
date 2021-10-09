@@ -4,6 +4,7 @@ import axios from "axios";
 export type Product = {
 	_id: string;
 	name: string;
+	full_name: string;
 	cores: number;
 	base_clock: number;
 	boost_clock: number;
