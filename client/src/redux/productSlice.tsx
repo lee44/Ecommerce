@@ -1,13 +1,19 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchProducts } from "./api";
+import { createSlice } from "@reduxjs/toolkit";
 import type { Product } from "./api";
+import { fetchProducts } from "./api";
+import { RootState } from "./store";
 
-type productState = {
+type ProductType = {
 	result: Product[];
 	status: "idle" | "pending" | "fulfilled" | "rejected";
 };
 
-const initialState: productState = {
+export type FilterType = {
+	AMD: boolean;
+	Intel: boolean;
+};
+
+const initialState: ProductType = {
 	result: [],
 	status: "idle",
 };
@@ -29,5 +35,16 @@ const productSlice = createSlice({
 		});
 	},
 });
+
+export const filterProducts = (state: RootState, filterState: FilterType) => {
+	const filterAMD = (product: Product) => {
+		return filterState.AMD ? true : product.manufacturer !== "AMD";
+	};
+	const filterIntel = (product: Product) => {
+		return filterState.Intel ? true : product.manufacturer !== "Intel";
+	};
+
+	return state.products.result.filter(filterAMD).filter(filterIntel);
+};
 
 export default productSlice.reducer;

@@ -1,15 +1,20 @@
 import { Grid } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Filter from "../../components/Filter/Filter";
 import ProgressCircle from "../../components/ProgressCircle/ProgressCircle";
 import { ResultGrid } from "../../components/ResultGrid/ResultGrid";
 import { fetchProducts } from "../../redux/api";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { filterProducts, FilterType } from "../../redux/productSlice";
 
 const Results = () => {
+	const [filter, setFilter] = useState<FilterType>({ AMD: true, Intel: true });
 	const dispatch = useAppDispatch();
-	const productsLoading = useAppSelector((state) => {
+	const productsStatus = useAppSelector((state) => {
 		return state.products.status;
+	});
+	const products = useAppSelector((state) => {
+		return filterProducts(state, filter);
 	});
 
 	useEffect(() => {
@@ -19,10 +24,10 @@ const Results = () => {
 	return (
 		<Grid container spacing={1} sx={{ marginTop: 1, marginBottom: 1 }}>
 			<Grid item xs={12} sm={4} md={3} lg={2}>
-				<Filter />
+				<Filter filter={filter} setFilter={setFilter} />
 			</Grid>
 			<Grid item xs={12} sm={8} md={9} lg={10}>
-				{productsLoading === "idle" ? <ProgressCircle /> : <ResultGrid />}
+				{productsStatus === "idle" ? <ProgressCircle /> : <ResultGrid products={products} />}
 			</Grid>
 		</Grid>
 	);
