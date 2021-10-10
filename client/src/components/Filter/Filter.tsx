@@ -44,9 +44,9 @@ const Filter = (props: Props) => {
 						control={
 							<Checkbox
 								color="secondary"
-								checked={props.filter.AMD ? props.filter.AMD : false}
+								checked={props.filter.amd ? props.filter.amd : false}
 								onClick={() => {
-									props.setFilter({ ...props.filter, AMD: !props.filter.AMD });
+									props.setFilter({ ...props.filter, amd: !props.filter.amd });
 								}}
 							/>
 						}
@@ -59,9 +59,9 @@ const Filter = (props: Props) => {
 						control={
 							<Checkbox
 								color="secondary"
-								checked={props.filter.Intel ? props.filter.Intel : false}
+								checked={props.filter.intel ? props.filter.intel : false}
 								onClick={() => {
-									props.setFilter({ ...props.filter, Intel: !props.filter.Intel });
+									props.setFilter({ ...props.filter, intel: !props.filter.intel });
 								}}
 							/>
 						}
@@ -77,35 +77,75 @@ const Filter = (props: Props) => {
 					<FormControlLabel
 						sx={{ justifyContent: "space-between" }}
 						value="75-100"
-						control={<Checkbox color="secondary" defaultChecked />}
+						control={
+							<Checkbox
+								color="secondary"
+								checked={props.filter.price ? props.filter.price.firstChoice : false}
+								onClick={() => {
+									props.setFilter({ ...props.filter, price: { ...props.filter.price, firstChoice: !props.filter.price.firstChoice } });
+								}}
+							/>
+						}
 						label="$75-100"
 						labelPlacement="start"
 					/>
 					<FormControlLabel
 						sx={{ justifyContent: "space-between" }}
 						value="100-200"
-						control={<Checkbox color="secondary" defaultChecked />}
+						control={
+							<Checkbox
+								color="secondary"
+								checked={props.filter.price ? props.filter.price.secondChoice : false}
+								onClick={() => {
+									props.setFilter({ ...props.filter, price: { ...props.filter.price, secondChoice: !props.filter.price.secondChoice } });
+								}}
+							/>
+						}
 						label="$100-200"
 						labelPlacement="start"
 					/>
 					<FormControlLabel
 						sx={{ justifyContent: "space-between" }}
 						value="200-300"
-						control={<Checkbox color="secondary" defaultChecked />}
+						control={
+							<Checkbox
+								color="secondary"
+								checked={props.filter.price ? props.filter.price.thirdChoice : false}
+								onClick={() => {
+									props.setFilter({ ...props.filter, price: { ...props.filter.price, thirdChoice: !props.filter.price.thirdChoice } });
+								}}
+							/>
+						}
 						label="$200-300"
 						labelPlacement="start"
 					/>
 					<FormControlLabel
 						sx={{ justifyContent: "space-between" }}
 						value="300-400"
-						control={<Checkbox color="secondary" defaultChecked />}
+						control={
+							<Checkbox
+								color="secondary"
+								checked={props.filter.price ? props.filter.price.fourthChoice : false}
+								onClick={() => {
+									props.setFilter({ ...props.filter, price: { ...props.filter.price, fourthChoice: !props.filter.price.fourthChoice } });
+								}}
+							/>
+						}
 						label="$300-400"
 						labelPlacement="start"
 					/>
 					<FormControlLabel
 						sx={{ justifyContent: "space-between" }}
 						value=""
-						control={<Checkbox color="secondary" defaultChecked />}
+						control={
+							<Checkbox
+								color="secondary"
+								checked={props.filter.price ? props.filter.price.fifthChoice : false}
+								onClick={() => {
+									props.setFilter({ ...props.filter, price: { ...props.filter.price, fifthChoice: !props.filter.price.fifthChoice } });
+								}}
+							/>
+						}
 						label="$400 or Greater"
 						labelPlacement="start"
 					/>

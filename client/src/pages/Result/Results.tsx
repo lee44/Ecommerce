@@ -8,7 +8,17 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { filterProducts, FilterType } from "../../redux/productSlice";
 
 const Results = () => {
-	const [filter, setFilter] = useState<FilterType>({ AMD: true, Intel: true });
+	const [filter, setFilter] = useState<FilterType>({
+		amd: true,
+		intel: true,
+		price: {
+			firstChoice: true,
+			secondChoice: true,
+			thirdChoice: true,
+			fourthChoice: true,
+			fifthChoice: true,
+		},
+	});
 	const dispatch = useAppDispatch();
 	const productsStatus = useAppSelector((state) => {
 		return state.products.status;
@@ -16,6 +26,8 @@ const Results = () => {
 	const products = useAppSelector((state) => {
 		return filterProducts(state, filter);
 	});
+
+	console.log("Rerendered");
 
 	useEffect(() => {
 		dispatch(fetchProducts("http://localhost:5000/api/processors"));
