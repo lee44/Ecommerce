@@ -1,7 +1,13 @@
 import { Checkbox, Divider, FormControlLabel, FormGroup, FormLabel, Stack, Switch } from "@mui/material";
 import { Box } from "@mui/system";
+import { FilterType } from "../../redux/productSlice";
 
-const Filter = () => {
+type Props = {
+	filter: FilterType;
+	setFilter: React.Dispatch<React.SetStateAction<FilterType>>;
+};
+
+const Filter = (props: Props) => {
 	return (
 		<Stack direction="column" divider={<Divider orientation="horizontal" flexItem />} spacing={2}>
 			<Box>
@@ -35,14 +41,30 @@ const Filter = () => {
 					<FormControlLabel
 						sx={{ justifyContent: "space-between" }}
 						value="AMD"
-						control={<Checkbox color="secondary" defaultChecked />}
+						control={
+							<Checkbox
+								color="secondary"
+								checked={props.filter.AMD ? props.filter.AMD : false}
+								onClick={() => {
+									props.setFilter({ ...props.filter, AMD: !props.filter.AMD });
+								}}
+							/>
+						}
 						label="AMD"
 						labelPlacement="start"
 					/>
 					<FormControlLabel
 						sx={{ justifyContent: "space-between" }}
 						value="Intel"
-						control={<Checkbox color="secondary" defaultChecked />}
+						control={
+							<Checkbox
+								color="secondary"
+								checked={props.filter.Intel ? props.filter.Intel : false}
+								onClick={() => {
+									props.setFilter({ ...props.filter, Intel: !props.filter.Intel });
+								}}
+							/>
+						}
 						label="Intel"
 						labelPlacement="start"
 					/>

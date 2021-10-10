@@ -9,6 +9,22 @@ const processorSchema = mongoose.Schema({
 		type: String,
 		required: [true, "name must be provided"],
 	},
+	manufacturer: {
+		type: String,
+		required: [true, "manufacturer must be provided"],
+	},
+	stock: {
+		type: Number,
+		required: [true, "stock must be provided"],
+	},
+	free_shipping: {
+		type: Boolean,
+		required: [true, "free_shipping must be provided"],
+	},
+	shipped_by: {
+		type: String,
+		required: [true, "shipped_by must be provided"],
+	},
 	cores: {
 		type: Number,
 		required: [true, "cores must be provided"],
@@ -34,8 +50,8 @@ const processorSchema = mongoose.Schema({
 		required: [true, "price must be provided"],
 	},
 	integrated_graphics: {
-		type: String,
-		enum: ["Yes", "No"],
+		type: Boolean,
+		required: [true, "integrated_graphics must be provided"],
 	},
 	reviews: {
 		type: Number,

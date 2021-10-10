@@ -5,6 +5,10 @@ export type Product = {
 	_id: string;
 	name: string;
 	full_name: string;
+	manufacturer: string;
+	stock: number;
+	free_shipping: boolean;
+	shipped_buy: string;
 	cores: number;
 	base_clock: number;
 	boost_clock: number;
@@ -12,7 +16,7 @@ export type Product = {
 	tdp: number;
 	price: number;
 	discount: number;
-	integrated_graphics: string;
+	integrated_graphics: boolean;
 	reviews: number;
 	stars: number;
 	release_date: Date;
