@@ -1,5 +1,5 @@
 import { Card, CardContent, CardMedia, Grid, Link, Stack, Typography } from "@mui/material";
-import React from "react";
+import { useHistory } from "react-router";
 
 type ShoppingProps = {
 	category: String;
@@ -9,9 +9,14 @@ type ShoppingProps = {
 };
 
 const ShoppingGrid = (props: ShoppingProps) => {
+	let history = useHistory();
+
+	const handleClick = () => {
+		history.push(`/results/${props.category.toLowerCase()}`);
+	};
 	return (
 		<Grid item xs={12} md={6} lg={4}>
-			<Card sx={{ display: "flex", padding: 2, justifyContent: "center", alignItems: "center" }}>
+			<Card sx={{ display: "flex", padding: 2, justifyContent: "center", alignItems: "center", cursor: "pointer" }} onClick={handleClick}>
 				<CardMedia component="img" sx={{ width: 100 }} image={process.env.PUBLIC_URL + `assets/shoppingGridItems/${props.image_src}`} alt="category_image" />
 				<CardContent>
 					<Typography component="div" variant="h2">
