@@ -1,5 +1,5 @@
 export const shoppingGridItems = [
-	{ category: "CPU/Processors", subCategory: ["Intel", "AMD", "Top Sellers"], url_parameter: ["intel", "amd", "top_sellers"], image_src: "cpu.png" },
+	{ category: "CPU", subCategory: ["Intel", "AMD", "Top Sellers"], url_parameter: ["intel", "amd", "top_sellers"], image_src: "cpu.png" },
 	{
 		category: "Motherboards",
 		subCategory: ["Intel", "AMD", "Barebone/Mini PCs"],

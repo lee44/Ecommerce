@@ -1,24 +1,21 @@
 import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Filter from "../../components/Filter/Filter";
 import ProgressCircle from "../../components/ProgressCircle/ProgressCircle";
 import { ResultGrid } from "../../components/ResultGrid/ResultGrid";
+import { filterProducts, FilterTypes, getManufacturers, getPrices } from "../../config/Filter/filterTypes";
 import { fetchProducts } from "../../redux/api";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { filterProducts, FilterType } from "../../redux/productSlice";
 
 const Results = () => {
-	const [filter, setFilter] = useState<FilterType>({
-		amd: true,
-		intel: true,
-		price: {
-			firstChoice: true,
-			secondChoice: true,
-			thirdChoice: true,
-			fourthChoice: true,
-			fifthChoice: true,
-		},
+	let { category } = useParams<{ category: string }>();
+
+	const [filter, setFilter] = useState<FilterTypes>({
+		manufacturer: getManufacturers(category),
+		price: getPrices(),
 	});
+
 	const dispatch = useAppDispatch();
 	const productsStatus = useAppSelector((state) => {
 		return state.products.status;
@@ -27,7 +24,7 @@ const Results = () => {
 		return filterProducts(state, filter);
 	});
 
-	console.log("Rerendered");
+	console.log(filter);
 
 	useEffect(() => {
 		dispatch(fetchProducts("http://localhost:5000/api/processors"));
