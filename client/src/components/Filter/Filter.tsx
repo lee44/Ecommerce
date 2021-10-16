@@ -1,14 +1,15 @@
 import { Checkbox, Divider, FormControlLabel, FormGroup, FormLabel, Stack, Switch } from "@mui/material";
 import { Box } from "@mui/system";
 import { useParams } from "react-router-dom";
-import { FilterTypes } from "../../config/Filter/filterTypes";
-import { manufacturer } from "../../config/Filter/manufacturer";
-import { miscellaneous } from "../../config/Filter/miscellaneous";
-import { price } from "../../config/Filter/price";
+import { price, shippingFilter } from "../../config/Filter/items";
+import { manufacturerFilter } from "../../config/Filter/manufacturer";
+import { filterExists, toggleFilter } from "../../config/Filter/util";
+import { Product } from "../../redux/api";
+import { FilterTypes, Group } from "../../typings/filter";
 
 type Props = {
-	filter: FilterTypes;
-	setFilter: React.Dispatch<React.SetStateAction<FilterTypes>>;
+	filters: FilterTypes[];
+	setFilters: React.Dispatch<React.SetStateAction<FilterTypes[]>>;
 };
 
 const Filter = (props: Props) => {
@@ -18,7 +19,7 @@ const Filter = (props: Props) => {
 		<Stack direction="column" divider={<Divider orientation="horizontal" flexItem />} spacing={2}>
 			<Box>
 				<FormGroup>
-					{miscellaneous.map((filter, index) => (
+					{shippingFilter.map((filter, index) => (
 						<FormControlLabel
 							key={index}
 							sx={{ justifyContent: "space-between" }}
@@ -33,7 +34,7 @@ const Filter = (props: Props) => {
 			<Box>
 				<FormGroup>
 					<FormLabel component="header">Manufacturer</FormLabel>
-					{manufacturer[category].map((filter, index) => (
+					{manufacturerFilter[category].map((filter, index) => (
 						<FormControlLabel
 							key={index}
 							sx={{ justifyContent: "space-between" }}
@@ -41,11 +42,9 @@ const Filter = (props: Props) => {
 							control={
 								<Checkbox
 									color="secondary"
-									checked={props.filter.manufacturer[index][filter]}
+									checked={filterExists(filter, Group.MANUFACTURER, props.filters)}
 									onClick={() => {
-										let newState = [...props.filter.manufacturer];
-										newState[index][filter] = !props.filter.manufacturer[index][filter];
-										props.setFilter({ ...props.filter, manufacturer: newState });
+										toggleFilter(filter, Group.MANUFACTURER, (p: Product) => p.manufacturer === filter, props.filters, props.setFilters);
 									}}
 								/>
 							}
@@ -66,11 +65,22 @@ const Filter = (props: Props) => {
 							control={
 								<Checkbox
 									color="secondary"
-									checked={props.filter.price[index][filter]}
+									checked={filterExists(filter, Group.PRICE, props.filters)}
 									onClick={() => {
-										let newState = [...props.filter.price];
-										newState[index][filter] = !props.filter.price[index][filter];
-										props.setFilter({ ...props.filter, price: newState });
+										toggleFilter(
+											filter,
+											Group.PRICE,
+											(p: Product) => {
+												const priceRange = filter.split("-");
+												if (priceRange.length > 1) return p.price >= parseInt(priceRange[0]) && p.price <= parseInt(priceRange[1]);
+												else {
+													const lastPriceRange = filter.split("or");
+													return p.price >= parseInt(lastPriceRange[0]);
+												}
+											},
+											props.filters,
+											props.setFilters
+										);
 									}}
 								/>
 							}
