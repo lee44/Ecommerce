@@ -8,7 +8,7 @@ export type Product = {
 	manufacturer: string;
 	stock: number;
 	free_shipping: boolean;
-	shipped_buy: string;
+	shipped_by: string;
 	cores: number;
 	base_clock: number;
 	boost_clock: number;

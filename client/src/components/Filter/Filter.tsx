@@ -3,9 +3,8 @@ import { Box } from "@mui/system";
 import { useParams } from "react-router-dom";
 import { price, shippingFilter } from "../../config/Filter/items";
 import { manufacturerFilter } from "../../config/Filter/manufacturer";
-import { filterExists, toggleFilter } from "../../config/Filter/util";
+import { filterExists, FilterTypes, Group, toggleFilter } from "../../config/Filter/util";
 import { Product } from "../../redux/api";
-import { FilterTypes, Group } from "../../typings/filter";
 
 type Props = {
 	filters: FilterTypes[];
@@ -24,7 +23,21 @@ const Filter = (props: Props) => {
 							key={index}
 							sx={{ justifyContent: "space-between" }}
 							value={filter}
-							control={<Switch color="secondary" />}
+							control={
+								<Switch
+									color="secondary"
+									checked={filterExists(filter, filter === "Shipped By Newegg" ? Group.SHIPPED_BY_NEWEGG : Group.FREE_SHIPPING, props.filters)}
+									onClick={() => {
+										toggleFilter(
+											filter,
+											filter === "Shipped By Newegg" ? Group.SHIPPED_BY_NEWEGG : Group.FREE_SHIPPING,
+											(p: Product) => (filter === "Shipped By Newegg" ? filter.includes(p.shipped_by) : p.free_shipping),
+											props.filters,
+											props.setFilters
+										);
+									}}
+								/>
+							}
 							label={filter}
 							labelPlacement="start"
 						/>
