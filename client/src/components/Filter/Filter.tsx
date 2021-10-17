@@ -26,11 +26,15 @@ const Filter = (props: Props) => {
 							control={
 								<Switch
 									color="secondary"
-									checked={filterExists(filter, filter === "Shipped By Newegg" ? Group.SHIPPED_BY_NEWEGG : Group.FREE_SHIPPING, props.filters)}
+									checked={filterExists(
+										filter,
+										filter === Group.STOCK ? Group.STOCK : filter === Group.FREE_SHIPPING ? Group.FREE_SHIPPING : Group.SHIPPED_BY_NEWEGG,
+										props.filters
+									)}
 									onClick={() => {
 										toggleFilter(
 											filter,
-											filter === "Shipped By Newegg" ? Group.SHIPPED_BY_NEWEGG : Group.FREE_SHIPPING,
+											filter === Group.STOCK ? Group.STOCK : filter === Group.FREE_SHIPPING ? Group.FREE_SHIPPING : Group.SHIPPED_BY_NEWEGG,
 											(p: Product) => (filter === "Shipped By Newegg" ? filter.includes(p.shipped_by) : p.free_shipping),
 											props.filters,
 											props.setFilters
