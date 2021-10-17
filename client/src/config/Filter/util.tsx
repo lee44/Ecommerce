@@ -27,7 +27,7 @@ export function removeFilter(name: string | number, group: Group, setFilters: Re
  * Return true if filter exists
  * @param {string | number} name name of the filter
  * @param {Group} group is the group the filter belongs to
- * @param {FilterTypes} filters all the filters selected
+ * @param {FilterTypes} filters all the selected filters
  */
 export function filterExists(name: string | number, group: Group, filters: FilterTypes[]) {
 	return filters.find((f) => f.name === name && f.group === group) !== undefined;
@@ -56,72 +56,30 @@ export function toggleFilter(
 }
 
 /**
- * Returns products that fall under any of the filters selected
+ * Returns products that fall under any of the selected filters
  * @param {RootState} state access to the store
- * @param {FilterTypes} filters all the filters selected
+ * @param {FilterTypes} filters all the selected filters
  */
 export function applyFilters(state: RootState, filters: FilterTypes[]) {
 	return state.products.result.filter((product) => {
-		const showByManufacturer = isShownByManufacturer(product, filters);
-		const showByPrice = isShownByPrice(product, filters);
-		const showByShippedNewegg = isShownByShippedNewegg(product, filters);
-		const showByFreeShipping = isShownByFreeShipping(product, filters);
-		const showByStock = isShownByStock(product, filters);
-		return showByManufacturer && showByPrice && showByShippedNewegg && showByFreeShipping && showByStock;
+		return checkFilters(product, filters);
 	});
 }
 
 /**
- * Checks if the product falls under any of the manufacturer filters selected
- * @param {Product} product
- * @param {FilterTypes} filters filters selected for manufacturers
+ * Returns true if the product falls under any of the selected filters
+ * @param {Product} product product to be evaluated
+ * @param {FilterTypes} filters all selected filters
  */
-function isShownByManufacturer(product: Product, filters: FilterTypes[]) {
-	const manufacturerFilters = filters.filter((filter) => filter.group === Group.MANUFACTURER);
-	if (!manufacturerFilters.length) return true;
-	return manufacturerFilters.some((filter) => filter.fnc(product));
-}
-
-/**
- * Checks if the product falls under any of the price filters selected
- * @param {Product} product
- * @param {FilterTypes} filters filters selected for manufacturers
- */
-function isShownByPrice(product: Product, filters: FilterTypes[]) {
-	const priceFilters = filters.filter((filter) => filter.group === Group.PRICE);
-	if (!priceFilters.length) return true;
-	return priceFilters.some((filter) => filter.fnc(product));
-}
-
-/**
- * Checks if the product shipped by Newegg
- * @param {Product} product
- * @param {FilterTypes} filters filters selected for manufacturers
- */
-function isShownByShippedNewegg(product: Product, filters: FilterTypes[]) {
-	const shippedNeweggFilters = filters.filter((filter) => filter.group === Group.SHIPPED_BY_NEWEGG);
-	if (!shippedNeweggFilters.length) return true;
-	return shippedNeweggFilters.some((filter) => filter.fnc(product));
-}
-
-/**
- * Checks if the product has Free Shipping
- * @param {Product} product
- * @param {FilterTypes} filters filters selected for manufacturers
- */
-function isShownByFreeShipping(product: Product, filters: FilterTypes[]) {
-	const freeShippingFilters = filters.filter((filter) => filter.group === Group.FREE_SHIPPING);
-	if (!freeShippingFilters.length) return true;
-	return freeShippingFilters.some((filter) => filter.fnc(product));
-}
-
-/**
- * Checks if the product in Stock
- * @param {Product} product
- * @param {FilterTypes} filters filters selected for manufacturers
- */
-function isShownByStock(product: Product, filters: FilterTypes[]) {
-	const inStockFilters = filters.filter((filter) => filter.group === Group.STOCK);
-	if (!inStockFilters.length) return true;
-	return inStockFilters.some((filter) => filter.fnc(product));
+function checkFilters(product: Product, filters: FilterTypes[]) {
+	let isFilter = true;
+	for (const value of Object.values(Group)) {
+		let selectedFilters = filters.filter((filter) => filter.group === value);
+		if (!selectedFilters.length) {
+			continue;
+		} else {
+			isFilter = isFilter && selectedFilters.some((filter) => filter.fnc(product));
+		}
+	}
+	return isFilter;
 }
