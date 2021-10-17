@@ -5,7 +5,7 @@ export enum Group {
 	MANUFACTURER = "Manufacturer",
 	PRICE = "Price",
 	SHIPPED_BY_NEWEGG = "Shipped By Newegg",
-	STOCK = "Stock",
+	STOCK = "In Stock",
 	FREE_SHIPPING = "Free Shipping",
 }
 
@@ -66,7 +66,8 @@ export function applyFilters(state: RootState, filters: FilterTypes[]) {
 		const showByPrice = isShownByPrice(product, filters);
 		const showByShippedNewegg = isShownByShippedNewegg(product, filters);
 		const showByFreeShipping = isShownByFreeShipping(product, filters);
-		return showByManufacturer && showByPrice && showByShippedNewegg && showByFreeShipping;
+		const showByStock = isShownByStock(product, filters);
+		return showByManufacturer && showByPrice && showByShippedNewegg && showByFreeShipping && showByStock;
 	});
 }
 
@@ -112,4 +113,15 @@ function isShownByFreeShipping(product: Product, filters: FilterTypes[]) {
 	const freeShippingFilters = filters.filter((filter) => filter.group === Group.FREE_SHIPPING);
 	if (!freeShippingFilters.length) return true;
 	return freeShippingFilters.some((filter) => filter.fnc(product));
+}
+
+/**
+ * Checks if the product in Stock
+ * @param {Product} product
+ * @param {FilterTypes} filters filters selected for manufacturers
+ */
+function isShownByStock(product: Product, filters: FilterTypes[]) {
+	const inStockFilters = filters.filter((filter) => filter.group === Group.STOCK);
+	if (!inStockFilters.length) return true;
+	return inStockFilters.some((filter) => filter.fnc(product));
 }
