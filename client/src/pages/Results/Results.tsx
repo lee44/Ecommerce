@@ -4,8 +4,8 @@ import Filter from "../../components/Filter/Filter";
 import ProgressCircle from "../../components/ProgressCircle/ProgressCircle";
 import { ResultGrid } from "../../components/ResultGrid/ResultGrid";
 import { applyFilters, FilterTypes } from "../../config/Filter/util";
-import { fetchProducts } from "../../redux/api";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchProducts } from "../../redux/productSlice";
 
 const Results = () => {
 	const [filters, setFilters] = useState<FilterTypes[]>([]);

@@ -1,6 +1,6 @@
 import { Button, Container, FormControl, FormControlLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
-import type { Product } from "../../redux/api";
-import LineBreak from "../LineBreak/LineBreak";
+import { Product } from "../../typings/product";
+import LineBreak from "../LineDivider/LineDivider";
 
 const PurchaseOptions = (props: Product) => {
 	return (

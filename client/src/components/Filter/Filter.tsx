@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { price, shippingFilter } from "../../config/Filter/items";
 import { manufacturerFilter } from "../../config/Filter/manufacturer";
 import { filterExists, FilterTypes, Group, toggleFilter } from "../../config/Filter/util";
-import { Product } from "../../redux/api";
+import { Product } from "../../typings/product";
 
 type Props = {
 	filters: FilterTypes[];

@@ -1,12 +1,12 @@
-import React from "react";
-import "./App.css";
-import { customTheme } from "./config/theme";
 import { ThemeProvider } from "@mui/material/styles";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
-import Home from "./pages/Home/Home";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Results from "./pages/Result/Results";
+import { customTheme } from "./config/theme";
 import Details from "./pages/Details/Details";
+import Home from "./pages/Home/Home";
+import Results from "./pages/Results/Results";
 
 function App() {
 	return (
