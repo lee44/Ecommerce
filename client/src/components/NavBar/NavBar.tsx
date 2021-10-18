@@ -8,15 +8,16 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
-import React from "react";
+import { useState } from "react";
 import logo from "../../logo.png";
 import { getMemoizedNumItems } from "../../redux/cartSlice";
 import { useAppSelector } from "../../redux/hooks";
+import CartDrawer from "../CartDrawer/CartDrawer";
 import { Search, SearchIconWrapper, StyledInputBase, StyledLogo } from "./styles";
 
 function NavBar() {
 	const numItems = useAppSelector(getMemoizedNumItems);
-
+	const [open, setOpen] = useState(false);
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position="static">
@@ -38,7 +39,7 @@ function NavBar() {
 					</Box>
 					<Box>
 						<Badge badgeContent={numItems} color="secondary">
-							<ShoppingCartIcon></ShoppingCartIcon>
+							<ShoppingCartIcon sx={{ cursor: "pointer" }} onClick={() => setOpen(!open)} />
 						</Badge>
 					</Box>
 					<Box>
@@ -48,6 +49,7 @@ function NavBar() {
 					</Box>
 				</Toolbar>
 			</AppBar>
+			<CartDrawer open={open} setOpen={setOpen}></CartDrawer>
 		</Box>
 	);
 }

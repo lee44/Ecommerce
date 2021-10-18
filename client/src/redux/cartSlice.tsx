@@ -1,8 +1,17 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import axios from "axios";
+import { Product } from "../typings/product";
 import { RootState } from "./store";
+
+export const fetchProduct = createAsyncThunk("fetch/product", async (url: string): Promise<Product[]> => {
+	const response = await axios.get(url);
+	const data = response.data;
+	return data;
+});
 
 type cartState = {
 	items: { [id: string]: number };
+	product?: Product;
 	status: "idle" | "pending" | "fulfilled" | "rejected";
 };
 

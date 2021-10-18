@@ -1,6 +1,6 @@
 import { Container, Grid } from "@mui/material";
-import { Product } from "../../redux/api";
-import ResultGridItems from "./ResultGridItems/ResultGridItems";
+import { Product } from "../../typings/product";
+import GridItems from "./GridItems/GridItems";
 
 type Props = {
 	products: Product[];
@@ -13,7 +13,7 @@ export const ResultGrid = (props: Props) => {
 				{props.products.map((product) => {
 					return (
 						<Grid key={product._id} item xs={12} md={6} lg={3}>
-							<ResultGridItems {...product} />
+							<GridItems {...product} />
 						</Grid>
 					);
 				})}

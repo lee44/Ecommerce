@@ -1,7 +1,7 @@
 import { Container, Typography } from "@mui/material";
-import type { Product } from "../../redux/api";
+import { Product } from "../../typings/product";
 import BulletDetails from "../BulletDetails/BulletDetails";
-import LineBreak from "../LineBreak/LineBreak";
+import LineBreak from "../LineDivider/LineDivider";
 import StarRating from "../StarRating/StarRating";
 
 export const Description = (props: Product) => {
