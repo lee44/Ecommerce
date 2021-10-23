@@ -27,7 +27,9 @@ const UserSchema = new mongoose.Schema({
 	resetPasswordExpire: Date,
 });
 
-// pre middleware that executes before data is saved into MongoDB https://mongoosejs.com/docs/middleware.html
+/**
+ * Middleware that executes before data is saved into MongoDB https://mongoosejs.com/docs/middleware.html
+ * */
 UserSchema.pre("save", async function (next) {
 	if (!this.isModified("password")) {
 		next();
@@ -40,18 +42,25 @@ UserSchema.pre("save", async function (next) {
 	next();
 });
 
-// Mongoose allows adding an instance method to documents constructed from Models. Similar to a class having methods but Mongoose allows us to define our own
+/*
+ * Mongoose allows adding an instance method to documents constructed from Models. Similar to a class having methods but Mongoose allows us to define our own
+ */
 UserSchema.methods.matchPassword = async function (password) {
 	return await bcrypt.compare(password, this.password);
 };
 
+/**
+ * Returns a web token signed with users id with an expiration time
+ */
 UserSchema.methods.getSignedJwtToken = function () {
 	return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
 		expiresIn: process.env.JWT_EXPIRE,
 	});
 };
 
-// In order to reset password, a token is required
+/**
+ * Returns a token used for resetting password
+ */
 UserSchema.methods.getResetPasswordToken = function () {
 	const resetToken = crypto.randomBytes(20).toString("hex");
 
