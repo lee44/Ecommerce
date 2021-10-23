@@ -1,5 +1,5 @@
-import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
+import { alpha, styled } from "@mui/material/styles";
 
 export const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -38,4 +38,12 @@ export const StyledLogo = styled("img")(({ theme }) => ({
 	width: "100px",
 	height: "50px",
 	padding: theme.spacing(1, 0, 1, 0),
+}));
+
+export const DrawerHeader = styled("div")(({ theme }) => ({
+	display: "flex",
+	alignItems: "center",
+	padding: theme.spacing(0, 1),
+	...theme.mixins.toolbar,
+	justifyContent: "flex-start",
 }));

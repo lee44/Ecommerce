@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import { useState } from "react";
+import { useHistory } from "react-router";
 import logo from "../../logo.png";
 import { getMemoizedNumItems } from "../../redux/cartSlice";
 import { useAppSelector } from "../../redux/hooks";
@@ -18,6 +19,11 @@ import { Search, SearchIconWrapper, StyledInputBase, StyledLogo } from "./styles
 function NavBar() {
 	const numItems = useAppSelector(getMemoizedNumItems);
 	const [open, setOpen] = useState(false);
+	const history = useHistory();
+
+	const handleClick = () => {
+		history.push("/login");
+	};
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position="static">
@@ -34,7 +40,7 @@ function NavBar() {
 					</Search>
 					<Box>
 						<IconButton size="large" color="inherit">
-							<AccountCircleIcon></AccountCircleIcon>
+							<AccountCircleIcon onClick={handleClick}></AccountCircleIcon>
 						</IconButton>
 					</Box>
 					<Box>
