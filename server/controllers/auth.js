@@ -42,11 +42,23 @@ export const login = async (req, res, next) => {
 	}
 };
 
+/**
+ * Sends a web token that allows a user to access a route(s)
+ * @param {Object} user instance of User model that gives access to all its methods
+ * @param {Number} statusCode
+ * @param {Object} res The response
+ */
 const sendToken = (user, statusCode, res) => {
 	const token = user.getSignedJwtToken();
 	res.status(statusCode).json({ success: true, token });
 };
 
+/**
+ * Sends a web token that allows a user to access a route(s)
+ * @param {Object} user instance of User model that gives access to all its methods
+ * @param {Number} statusCode
+ * @param {Object} res The response
+ */
 export const forgotPassword = async (req, res, next) => {
 	// Send Email to email provided but first check if user exists
 	const { email } = req.body;
@@ -64,7 +76,7 @@ export const forgotPassword = async (req, res, next) => {
 		await user.save();
 
 		// Create reset url to email to provided email
-		const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+		const resetUrl = `http://localhost:5000/api/auth/resetPassword/${resetToken}`;
 
 		// HTML Message
 		const message = `
@@ -96,8 +108,15 @@ export const forgotPassword = async (req, res, next) => {
 	}
 };
 
+/**
+ * Resets password using the given resetToken
+ * @param {Object} req the request
+ * @param {Object} res the response
+ * @param {Object} next calls the next middleware
+ */
 export const resetPassword = async (req, res, next) => {
-	// Compare token in URL params to hashed token
+	// req.params.resetToken is only a 20 digit random number
+	// The number is used to recreate the hashed password that WAS stored in the db
 	const resetPasswordToken = crypto.createHash("sha256").update(req.params.resetToken).digest("hex");
 
 	try {

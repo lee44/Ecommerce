@@ -1,6 +1,12 @@
 import ErrorResponse from "../utils/errorResponse.js";
 
-// Catches all errors we pass using next()
+/**
+ * Error-handling middleware that catches all errors passed using next()
+ * @param {Object} err The error object containing the error code, message, and name
+ * @param {Object} req The request
+ * @param {Object} res The response
+ * @param {Object} next Calls the next middleware
+ */
 const errorHandler = (err, req, res, next) => {
 	let error = { ...err };
 

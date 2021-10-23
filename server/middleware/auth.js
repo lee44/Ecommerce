@@ -2,6 +2,12 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 import ErrorResponse from "../utils/errorResponse.js";
 
+/**
+ * Middleware that prevents access to a route unless provided javascript web token is valid
+ * @param {Object} req The request
+ * @param {Object} res The response
+ * @param {Object} next Calls the next middleware
+ */
 export const protect = async (req, res, next) => {
 	let token;
 
