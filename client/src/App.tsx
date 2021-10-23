@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar/NavBar";
 import { customTheme } from "./config/theme";
 import Details from "./pages/Details/Details";
 import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
 import Results from "./pages/Results/Results";
 
 function App() {
@@ -20,6 +21,9 @@ function App() {
 						</Route>
 						<Route exact path="/results/:category">
 							<Results />
+						</Route>
+						<Route exact path="/login">
+							<Login />
 						</Route>
 						<Route path="/results/:category/:id">
 							<Details />
