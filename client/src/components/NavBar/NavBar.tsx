@@ -39,8 +39,8 @@ function NavBar() {
 						<StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
 					</Search>
 					<Box>
-						<IconButton size="large" color="inherit">
-							<AccountCircleIcon onClick={handleClick}></AccountCircleIcon>
+						<IconButton size="large" color="inherit" onClick={handleClick}>
+							<AccountCircleIcon></AccountCircleIcon>
 						</IconButton>
 					</Box>
 					<Box>
