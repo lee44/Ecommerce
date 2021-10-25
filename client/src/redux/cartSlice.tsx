@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Product } from "../typings/product";
 import { RootState } from "./store";
+import { Product } from "./typings/product";
 
 export const fetchProduct = createAsyncThunk("fetch/product", async (url: string): Promise<Product[]> => {
 	const response = await axios.get(url);

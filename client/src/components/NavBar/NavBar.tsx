@@ -31,7 +31,7 @@ function NavBar() {
 					<IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
 						<MenuIcon />
 					</IconButton>
-					<StyledLogo src={logo}></StyledLogo>
+					<StyledLogo src={logo} onClick={() => history.push("/")} sx={{ cursor: "pointer" }}></StyledLogo>
 					<Search>
 						<SearchIconWrapper>
 							<SearchIcon />

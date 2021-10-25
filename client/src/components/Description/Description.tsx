@@ -1,5 +1,5 @@
 import { Container, Typography } from "@mui/material";
-import { Product } from "../../typings/product";
+import { Product } from "../../redux/typings/product";
 import BulletDetails from "../BulletDetails/BulletDetails";
 import LineBreak from "../LineDivider/LineDivider";
 import StarRating from "../StarRating/StarRating";
