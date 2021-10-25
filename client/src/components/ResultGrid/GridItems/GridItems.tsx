@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import { useHistory, useLocation } from "react-router";
 import { addToCart } from "../../../redux/cartSlice";
 import { useAppDispatch } from "../../../redux/hooks";
-import { Product } from "../../../typings/product";
+import { Product } from "../../../redux/typings/product";
 import StarRating from "../../StarRating/StarRating";
 
 const GridItems = (props: Product) => {

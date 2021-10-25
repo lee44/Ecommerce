@@ -1,5 +1,5 @@
 import { Container, Grid } from "@mui/material";
-import { Product } from "../../typings/product";
+import { Product } from "../../redux/typings/product";
 import GridItems from "./GridItems/GridItems";
 
 type Props = {

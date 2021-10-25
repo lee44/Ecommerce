@@ -2,7 +2,7 @@ import { Container, Grid } from "@mui/material";
 import { useParams } from "react-router";
 import { Description } from "../../components/Description/Description";
 import Error from "../../components/Error/Error";
-import PurchaseOptions from "../../components/PurchaseOpionts/PurchaseOptions";
+import PurchaseOptions from "../../components/PurchaseOptions/PurchaseOptions";
 import { useAppSelector } from "../../redux/hooks";
 import { StyleCarousel } from "./style";
 

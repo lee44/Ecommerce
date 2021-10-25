@@ -1,5 +1,5 @@
 import { RootState } from "../../redux/store";
-import { Product } from "../../typings/product";
+import { Product } from "../../redux/typings/product";
 
 export enum Group {
 	MANUFACTURER = "Manufacturer",
