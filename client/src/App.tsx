@@ -22,7 +22,7 @@ function App() {
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/register" component={Register} />
 						<Route exact path="/forgotpassword" component={ForgotPassword} />
-						<Route exact path="/passwordreset/:resetToken" component={ResetPassword} />
+						<Route exact path="/resetPassword/:resetToken" component={ResetPassword} />
 						<Route exact path="/results/:category" component={Results} />
 						<Route path="/results/:category/:id" component={Details} />
 					</Switch>

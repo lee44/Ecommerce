@@ -36,7 +36,6 @@ const Register = () => {
 	});
 	const { handleSubmit, control } = useForm<FormInput>({ defaultValues: defaultValues, resolver: yupResolver(validationSchema) });
 	const onSubmit = async (formData: FormInput) => {
-		console.log(formData);
 		try {
 			const { data } = await axios.post("/api/auth/register", formData, config);
 			localStorage.setItem("authToken", data.token);

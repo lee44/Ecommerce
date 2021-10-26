@@ -31,13 +31,15 @@ const Login = () => {
 	});
 	const { handleSubmit, control } = useForm<FormInput>({ defaultValues: defaultValues, resolver: yupResolver(validationSchema) });
 	const onSubmit = async (formData: FormInput) => {
-		console.log(formData);
 		try {
 			const { data } = await axios.post("/api/auth/login", formData, config);
 			localStorage.setItem("authToken", data.token);
 			history.push("/");
 		} catch (error) {
 			setError("Invalid email and password");
+			setTimeout(() => {
+				setError("");
+			}, 5000);
 		}
 	};
 

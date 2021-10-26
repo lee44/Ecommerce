@@ -28,16 +28,16 @@ const ForgotPassword = () => {
 	});
 	const { handleSubmit, control } = useForm<FormInput>({ defaultValues: defaultValues, resolver: yupResolver(validationSchema) });
 	const onSubmit = async (formData: FormInput) => {
-		console.log(formData);
 		try {
 			const response = await axios.post("/api/auth/forgotpassword", formData, config);
 			setEmail(true);
-			setError(false);
-			console.log(response);
 		} catch (error) {
-			setEmail(false);
 			setError(true);
 		}
+		setTimeout(() => {
+			setEmail(false);
+			setError(false);
+		}, 5000);
 	};
 	const theme = useTheme();
 

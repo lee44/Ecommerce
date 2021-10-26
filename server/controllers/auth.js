@@ -75,7 +75,7 @@ export const forgotPassword = async (req, res, next) => {
 		await user.save();
 
 		// Create reset url to email to provided email
-		const resetUrl = `http://localhost:5000/api/auth/resetPassword/${resetToken}`;
+		const resetUrl = `http://localhost:3000/resetPassword/${resetToken}`;
 
 		// HTML Message
 		const message = `
