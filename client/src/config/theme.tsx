@@ -50,4 +50,13 @@ export const customTheme = createTheme({
 			fontSize: "1rem",
 		},
 	},
+	components: {
+		MuiAlertTitle: {
+			styleOverrides: {
+				root: {
+					fontWeight: 600,
+				},
+			},
+		},
+	},
 });
