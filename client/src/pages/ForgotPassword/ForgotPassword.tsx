@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, Container, Grid, Paper, Typography, useTheme } from "@mui/material";
+import { Alert, AlertTitle, Box, Button, Container, Grid, Paper, Typography, useTheme } from "@mui/material";
 import axios, { AxiosRequestConfig } from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import * as Yup from "yup";
@@ -19,6 +20,8 @@ const config: AxiosRequestConfig = {
 };
 
 const ForgotPassword = () => {
+	const [email, setEmail] = useState(false);
+	const [error, setError] = useState(false);
 	const history = useHistory();
 	const validationSchema = Yup.object().shape({
 		email: Yup.string().required("Email is required").email("Email is invalid"),
@@ -27,10 +30,14 @@ const ForgotPassword = () => {
 	const onSubmit = async (formData: FormInput) => {
 		console.log(formData);
 		try {
-			const { data } = await axios.post("/api/auth/forgotPassword", formData, config);
-
-			history.push("/");
-		} catch (error) {}
+			const response = await axios.post("/api/auth/forgotpassword", formData, config);
+			setEmail(true);
+			setError(false);
+			console.log(response);
+		} catch (error) {
+			setEmail(false);
+			setError(true);
+		}
 	};
 	const theme = useTheme();
 
@@ -41,6 +48,18 @@ const ForgotPassword = () => {
 		>
 			<Paper>
 				<Box px={3} py={2}>
+					{email && (
+						<Alert severity="success">
+							<AlertTitle sx={{ textAlign: "start" }}>Success</AlertTitle>
+							Email has been sent
+						</Alert>
+					)}
+					{error && (
+						<Alert severity="error">
+							<AlertTitle sx={{ textAlign: "start" }}>Failure</AlertTitle>
+							Email does not exists
+						</Alert>
+					)}
 					<Typography variant="h1" align="center" my={2}>
 						Forgot Password
 					</Typography>
