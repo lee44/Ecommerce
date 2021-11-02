@@ -58,7 +58,7 @@ function NavBar() {
 		const menuBoundary = {
 			left: menu?.offsetLeft,
 			top: e.currentTarget.offsetTop + e.currentTarget.offsetHeight,
-			right: menu?.offsetLeft + menu?.offsetHeight,
+			right: menu?.offsetLeft + menu?.offsetWidth,
 			bottom: menu?.offsetTop + menu?.offsetHeight,
 		};
 		if (e.clientX >= menuBoundary.left && e.clientX < menuBoundary.right && e.clientY < menuBoundary.bottom && e.clientY >= menuBoundary.top) {
