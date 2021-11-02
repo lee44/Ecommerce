@@ -1,3 +1,4 @@
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
@@ -18,6 +19,7 @@ app.use(cors());
 app.use("/api/processors", processorRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/private", privateRouter);
+app.use(cookieParser);
 
 // app.use("/api/motherboard", motherboardRouter);
 // app.use("/api/case", caseRouter);

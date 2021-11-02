@@ -1,11 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Alert, Box, Button, Container, Grid, Link, Paper, Typography, useTheme } from "@mui/material";
-import axios, { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import * as Yup from "yup";
 import { InputText } from "../../components/Form/InputText";
+import { axios_api } from "../../config/Axios/api";
+import { ENDPOINTS } from "../../config/Endpoints/endpoints";
 
 type FormInput = {
 	email: string;
@@ -15,10 +16,6 @@ type FormInput = {
 const defaultValues = {
 	email: "",
 	password: "",
-};
-
-const config: AxiosRequestConfig = {
-	headers: { "Content-Type": "application/json" },
 };
 
 const Login = () => {
@@ -32,8 +29,7 @@ const Login = () => {
 	const { handleSubmit, control } = useForm<FormInput>({ defaultValues: defaultValues, resolver: yupResolver(validationSchema) });
 	const onSubmit = async (formData: FormInput) => {
 		try {
-			const { data } = await axios.post("/api/auth/login", formData, config);
-			localStorage.setItem("authToken", data.token);
+			const { data } = await axios_api.post(ENDPOINTS.LOGIN, formData);
 			history.push("/");
 		} catch (error) {
 			setError("Invalid email and password");
@@ -43,11 +39,7 @@ const Login = () => {
 		}
 	};
 
-	useEffect(() => {
-		if (localStorage.getItem("authToken")) {
-			history.push("/");
-		}
-	}, [history]);
+	useEffect(() => {}, [history]);
 
 	return (
 		<Container

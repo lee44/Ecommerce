@@ -3,8 +3,8 @@ import { Box } from "@mui/system";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import ShoppingGrid from "../../components/ShoppingGrid/ShoppingGrid";
-import { carouselSlides } from "../../config/carouselSlides";
-import { shoppingGridItems } from "../../config/shoppingGridItems";
+import { carouselSlides } from "../../config/Carousel/slides";
+import { shoppingGridItems } from "../../config/ProductCategory/shoppingGridItems";
 
 function Home() {
 	return (

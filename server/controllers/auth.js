@@ -7,6 +7,7 @@ export const register = async (req, res, next) => {
 	const { username, email, password } = req.body;
 	try {
 		const user = await User.create({ username, email, password });
+		console.log("User Registered");
 		sendToken(user, 200, res);
 	} catch (err) {
 		next(err);
@@ -35,6 +36,7 @@ export const login = async (req, res, next) => {
 		if (!isMatch) {
 			return next(new ErrorResponse("Invalid credentials", 401));
 		}
+		console.log("User logged in");
 		sendToken(user, 200, res);
 	} catch (err) {
 		next(err);
@@ -42,14 +44,24 @@ export const login = async (req, res, next) => {
 };
 
 /**
- * Sends a web token that allows a user to access a route(s)
+ * Sends an access and refresh token that allows a user to access routes
+ * Refresh token: expires in 15 minutes and renewed using the access token
+ * Access token: expires in 24 hours
  * @param {Object} user instance of User model that gives access to all its methods
  * @param {Number} statusCode
  * @param {Object} res The response
  */
 const sendToken = (user, statusCode, res) => {
 	const token = user.getSignedJwtToken();
-	res.status(statusCode).json({ success: true, token });
+	res.cookie("refresh_token", token, {
+		maxAge: 2 * 60 * 1000, // 15 min
+		secure: true,
+		sameSite: true,
+	});
+	res.cookie("access_token", token, {
+		maxAge: 24 * 60 * 60 * 1000, // 24 hour
+	});
+	res.status(statusCode).send("Cookie was sent");
 };
 
 /**

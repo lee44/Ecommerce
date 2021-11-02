@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import { alpha, styled } from "@mui/material/styles";
 
@@ -46,4 +47,13 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
 	padding: theme.spacing(0, 1),
 	...theme.mixins.toolbar,
 	justifyContent: "flex-start",
+}));
+
+export const StyledProfile = styled(Grid)(({ theme }) => ({
+	width: "125px",
+	margin: theme.spacing(0, 1),
+	border: `1px solid transparent`,
+	":hover": {
+		border: "1px solid white",
+	},
 }));

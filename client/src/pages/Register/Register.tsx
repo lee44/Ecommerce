@@ -38,7 +38,7 @@ const Register = () => {
 	const onSubmit = async (formData: FormInput) => {
 		try {
 			const { data } = await axios.post("/api/auth/register", formData, config);
-			localStorage.setItem("authToken", data.token);
+			// localStorage.setItem("authToken", data.token);
 			history.push("/");
 		} catch (error) {}
 	};
