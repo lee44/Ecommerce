@@ -38,7 +38,7 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export const StyledLogo = styled("img")(({ theme }) => ({
 	width: "100px",
 	height: "50px",
-	padding: theme.spacing(1, 0, 1, 0),
+	padding: theme.spacing(1, 1, 1, 1),
 }));
 
 export const DrawerHeader = styled("div")(({ theme }) => ({
@@ -50,7 +50,8 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export const StyledProfile = styled(Grid)(({ theme }) => ({
-	width: "125px",
+	width: "auto",
+	flexWrap: "nowrap",
 	margin: theme.spacing(0, 1),
 	border: `1px solid transparent`,
 	":hover": {

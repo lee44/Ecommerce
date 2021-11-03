@@ -50,7 +50,7 @@ UserSchema.methods.matchPassword = async function (password) {
 };
 
 /**
- * Returns a web token signed with users id with an expiration time
+ * Returns a web token signed with users id
  */
 UserSchema.methods.getSignedJwtToken = function () {
 	return jwt.sign({ id: this._id }, process.env.JWT_SECRET);

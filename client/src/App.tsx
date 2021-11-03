@@ -19,16 +19,18 @@ function App() {
 			<CookiesProvider>
 				<Router>
 					<div className="App">
-						<NavBar />
 						<Switch>
-							<Route exact path="/" component={Home} />
-							<Route exact path="/private" component={Private} />
 							<Route exact path="/login" component={Login} />
-							<Route exact path="/register" component={Register} />
-							<Route exact path="/forgotpassword" component={ForgotPassword} />
-							<Route exact path="/resetPassword/:resetToken" component={ResetPassword} />
-							<Route exact path="/results/:category" component={Results} />
-							<Route path="/results/:category/:id" component={Details} />
+							<>
+								<NavBar />
+								<Route exact path="/" component={Home} />
+								<Route exact path="/private" component={Private} />
+								<Route exact path="/register" component={Register} />
+								<Route exact path="/forgotpassword" component={ForgotPassword} />
+								<Route exact path="/resetPassword/:resetToken" component={ResetPassword} />
+								<Route exact path="/results/:category" component={Results} />
+								<Route path="/results/:category/:id" component={Details} />
+							</>
 						</Switch>
 					</div>
 				</Router>

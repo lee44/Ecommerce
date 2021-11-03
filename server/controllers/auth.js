@@ -53,8 +53,13 @@ export const login = async (req, res, next) => {
  */
 const sendToken = (user, statusCode, res) => {
 	const token = user.getSignedJwtToken();
-	res.cookie("refresh_token", token, {
+	res.cookie("username", user.username, {
 		maxAge: 2 * 60 * 1000, // 15 min
+		secure: true,
+		sameSite: true,
+	});
+	res.cookie("refresh_token", token, {
+		maxAge: 15 * 60 * 1000, // 15 min
 		secure: true,
 		sameSite: true,
 	});
