@@ -24,6 +24,12 @@ function NavBar() {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const showMenu = Boolean(anchorEl);
 	const [cookie, setCookie] = useCookies(["username"]);
+	const userStatus = useAppSelector((state) => {
+		return state.user.status;
+	});
+	const userName = useAppSelector((state) => {
+		return state.user.username;
+	});
 	const theme = createTheme({
 		components: {
 			MuiList: {
@@ -37,7 +43,7 @@ function NavBar() {
 	});
 
 	const handleMouseOver = (event: React.MouseEvent<HTMLElement>) => {
-		if (cookie.username) setAnchorEl(event.currentTarget);
+		if (userName) setAnchorEl(event.currentTarget);
 	};
 
 	const handleMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
@@ -84,7 +90,7 @@ function NavBar() {
 					<StyledProfile
 						container
 						id="account_menu_button"
-						onClick={() => (!cookie.username ? history.push("/login") : "")}
+						onClick={() => (userStatus !== "succeeded" ? history.push("/login") : "")}
 						onMouseOver={handleMouseOver}
 						onMouseLeave={handleMouseLeave}
 						sx={{ cursor: "pointer", zIndex: 1301 }}
@@ -108,7 +114,7 @@ function NavBar() {
 									whiteSpace: "pre-wrap",
 								}}
 							>
-								{cookie.username ? `Welcome\n${cookie.username}` : "Welcome\nSign In / Register"}
+								{userStatus === "succeeded" ? `Welcome\n${userName}` : "Welcome\nSign In / Register"}
 							</Typography>
 						</Grid>
 					</StyledProfile>

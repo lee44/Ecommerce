@@ -1,7 +1,8 @@
 import crypto from "crypto";
-import User from "../models/user.js";
-import ErrorResponse from "../utils/errorResponse.js";
-import { sendEmail } from "../utils/sendEmail.js";
+import User from "../../models/user.js";
+import ErrorResponse from "../../utils/errorResponse.js";
+import { sendEmail } from "../../utils/sendEmail.js";
+import { sendToken } from "../../utils/sendToken.js";
 
 export const register = async (req, res, next) => {
 	const { username, email, password } = req.body;
@@ -41,32 +42,6 @@ export const login = async (req, res, next) => {
 	} catch (err) {
 		next(err);
 	}
-};
-
-/**
- * Sends an access and refresh token that allows a user to access routes
- * Refresh token: expires in 15 minutes and renewed using the access token
- * Access token: expires in 24 hours
- * @param {Object} user instance of User model that gives access to all its methods
- * @param {Number} statusCode
- * @param {Object} res The response
- */
-const sendToken = (user, statusCode, res) => {
-	const token = user.getSignedJwtToken();
-	res.cookie("username", user.username, {
-		maxAge: 2 * 60 * 1000, // 15 min
-		secure: true,
-		sameSite: true,
-	});
-	res.cookie("refresh_token", token, {
-		maxAge: 15 * 60 * 1000, // 15 min
-		secure: true,
-		sameSite: true,
-	});
-	res.cookie("access_token", token, {
-		maxAge: 24 * 60 * 60 * 1000, // 24 hour
-	});
-	res.status(statusCode).send("Cookie was sent");
 };
 
 /**

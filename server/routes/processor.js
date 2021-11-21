@@ -1,5 +1,5 @@
 import express from "express";
-import { getProcessor, getProcessorQuery } from "../controllers/getProcessor.js";
+import { getProcessor, getProcessorQuery } from "../controllers/product/getProcessor.js";
 
 const router = express.Router();
 

@@ -12,7 +12,7 @@ export const protect = async (req, res, next) => {
 	let token;
 
 	if (req.headers.cookie) {
-		token = req.headers.cookie.split("access_token=")[1];
+		token = req.headers.cookie.split("refresh_token")[1];
 	}
 
 	if (!token) {

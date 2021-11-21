@@ -1,5 +1,6 @@
 import { Logout, PersonAdd, Settings } from "@mui/icons-material";
 import { Avatar, Divider, ListItemIcon, Menu, MenuItem } from "@mui/material";
+import { useCookies } from "react-cookie";
 
 type propTypes = {
 	anchorEl: HTMLElement | null;
@@ -8,6 +9,12 @@ type propTypes = {
 };
 
 const AccountMenu = (props: propTypes) => {
+	const [cookie, setCookie, removeCookie] = useCookies(["access_token"]);
+
+	const handleLogOut = () => {
+		removeCookie("access_token");
+	};
+
 	return (
 		<Menu
 			id="account_menu"
@@ -62,7 +69,7 @@ const AccountMenu = (props: propTypes) => {
 				</ListItemIcon>
 				Settings
 			</MenuItem>
-			<MenuItem>
+			<MenuItem onClick={() => handleLogOut()}>
 				<ListItemIcon>
 					<Logout fontSize="small" />
 				</ListItemIcon>

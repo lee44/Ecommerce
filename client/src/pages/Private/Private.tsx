@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import { useCookies } from "react-cookie";
 // import { useHistory } from "react-router";
-import { axios_api } from "../../config/Axios/api";
+import { axios_api } from "../../config/API/api";
 
 const Private = () => {
 	// const history = useHistory();

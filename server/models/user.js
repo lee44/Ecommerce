@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 /**
- * Middleware that executes before data is saved into MongoDB https://mongoosejs.com/docs/middleware.html
+ * Middleware that executes before data is saved into MongoDB for passwords https://mongoosejs.com/docs/middleware.html
  * */
 UserSchema.pre("save", async function (next) {
 	if (!this.isModified("password")) {
@@ -52,8 +52,8 @@ UserSchema.methods.matchPassword = async function (password) {
 /**
  * Returns a web token signed with users id
  */
-UserSchema.methods.getSignedJwtToken = function () {
-	return jwt.sign({ id: this._id }, process.env.JWT_SECRET);
+UserSchema.methods.getSignedJwtToken = function (expiresIn) {
+	return jwt.sign({ id: this._id }, process.env.JWT_SECRET, { expiresIn: expiresIn });
 };
 
 /**

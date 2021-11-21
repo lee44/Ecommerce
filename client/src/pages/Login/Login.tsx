@@ -5,21 +5,22 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import * as Yup from "yup";
 import { InputText } from "../../components/Form/InputText";
-import { axios_api } from "../../config/Axios/api";
-import { ENDPOINTS } from "../../config/Endpoints/endpoints";
+import { useAppDispatch } from "../../redux/hooks";
+import { fetchTokens } from "../../redux/userSlice";
 
-type FormInput = {
+export type FormInput = {
 	email: string;
 	password: string;
 };
 
 const defaultValues = {
-	email: "",
-	password: "",
+	email: "jlee7772@gmail.com",
+	password: "123456",
 };
 
 const Login = () => {
 	const [error, setError] = useState<string>();
+	const dispatch = useAppDispatch();
 	const theme = useTheme();
 	const history = useHistory();
 	const validationSchema = Yup.object().shape({
@@ -27,9 +28,9 @@ const Login = () => {
 		password: Yup.string().required("Password is required").min(6, "Password must be at least 6 characters").max(40, "Password must not exceed 40 characters"),
 	});
 	const { handleSubmit, control } = useForm<FormInput>({ defaultValues: defaultValues, resolver: yupResolver(validationSchema) });
-	const onSubmit = async (formData: FormInput) => {
+	const onSubmit = (formData: FormInput) => {
 		try {
-			const { data } = await axios_api.post(ENDPOINTS.LOGIN, formData);
+			dispatch(fetchTokens(formData));
 			history.push("/");
 		} catch (error) {
 			setError("Invalid email and password");

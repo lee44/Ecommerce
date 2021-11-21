@@ -1,4 +1,4 @@
-import Processor from "../models/processor.js";
+import Processor from "../../models/processor.js";
 
 export const getProcessor = async (req, res) => {
 	try {
