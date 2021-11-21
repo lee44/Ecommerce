@@ -23,11 +23,7 @@ const initialState = {
 const userSlice = createSlice({
 	name: "user",
 	initialState: initialState,
-	reducers: {
-		deleteToken(state,action) => {
-			
-		}
-	},
+	reducers: {},
 	extraReducers(builder) {
 		builder.addCase(fetchTokens.pending, (state, action) => {
 			state.status = "loading";
