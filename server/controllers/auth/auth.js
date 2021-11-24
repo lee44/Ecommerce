@@ -1,3 +1,11 @@
-export const register = async (req, res, next) => {};
+import User from "../../models/user.js";
 
-export const login = async (req, res, next) => {};
+export const register = async (req, res, next) => {
+	const { username, email, password } = req.body;
+	try {
+		await User.create({ username, email, password });
+		console.log("User Registered");
+	} catch (err) {
+		next(err);
+	}
+};

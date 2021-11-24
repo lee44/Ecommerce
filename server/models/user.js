@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
@@ -21,6 +22,30 @@ const UserSchema = new mongoose.Schema({
 		select: false,
 	},
 });
+
+/**
+ * Middleware that executes before data is saved into MongoDB for passwords https://mongoosejs.com/docs/middleware.html
+ * */
+UserSchema.pre("save", async function (next) {
+	if (!this.isModified("password")) {
+		next();
+	}
+	// Generated 10 random bytes
+	const salt = await bcrypt.genSalt(10);
+	// Combine 10 random bytes with the user's password
+	this.password = await bcrypt.hash(this.password, salt);
+	// Pre middleware functions are executed one after another when each middleware calls next
+	next();
+});
+
+UserSchema.methods.matchPassword = async function (password) {
+	try {
+		return await bcrypt.compare(password, this.password);
+	} catch (error) {
+		console.log(error);
+		return false;
+	}
+};
 
 const User = mongoose.model("User", UserSchema);
 

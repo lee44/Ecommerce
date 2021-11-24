@@ -1,12 +1,13 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Alert, Box, Button, Container, Grid, Link, Paper, Typography, useTheme } from "@mui/material";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import * as Yup from "yup";
 import { InputText } from "../../components/Form/InputText";
+import { ENDPOINTS } from "../../config/Endpoints/endpoints";
 import { useAppDispatch } from "../../redux/hooks";
-import { fetchTokens } from "../../redux/userSlice";
 
 export type FormInput = {
 	email: string;
@@ -28,10 +29,9 @@ const Login = () => {
 		password: Yup.string().required("Password is required").min(6, "Password must be at least 6 characters").max(40, "Password must not exceed 40 characters"),
 	});
 	const { handleSubmit, control } = useForm<FormInput>({ defaultValues: defaultValues, resolver: yupResolver(validationSchema) });
-	const onSubmit = (formData: FormInput) => {
+	const onSubmit = async (formData: FormInput) => {
 		try {
-			dispatch(fetchTokens(formData));
-			history.push("/");
+			await axios.post(ENDPOINTS.LOGIN, formData);
 		} catch (error) {
 			setError("Invalid email and password");
 			setTimeout(() => {
