@@ -15,7 +15,7 @@ export type FormInput = {
 };
 
 const defaultValues = {
-	email: "jlee7772@gmail.com",
+	email: "jleework7772@gmail.com",
 	password: "123456",
 };
 
@@ -31,7 +31,8 @@ const Login = () => {
 	const { handleSubmit, control } = useForm<FormInput>({ defaultValues: defaultValues, resolver: yupResolver(validationSchema) });
 	const onSubmit = async (formData: FormInput) => {
 		try {
-			await axios.post(ENDPOINTS.LOGIN, formData);
+			const resp = await axios.post(ENDPOINTS.LOGIN, formData);
+			console.log(resp);
 		} catch (error) {
 			setError("Invalid email and password");
 			setTimeout(() => {

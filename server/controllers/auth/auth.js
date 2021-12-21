@@ -5,6 +5,8 @@ export const register = async (req, res, next) => {
 	try {
 		await User.create({ username, email, password });
 		console.log("User Registered");
+
+		return res.status(200).redirect("/");
 	} catch (err) {
 		next(err);
 	}

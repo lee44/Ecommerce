@@ -4,8 +4,8 @@ import User from "../models/user.js";
 const passportConfig = (passport) => {
 	var LocalStrategy = passportlocal.Strategy;
 	passport.use(
-		new LocalStrategy(function (username, password, done) {
-			User.findOne({ username: username }, "password", function (err, user) {
+		new LocalStrategy({ usernameField: "email" }, function (username, password, done) {
+			User.findOne({ email: username }, "password", function (err, user) {
 				if (err) {
 					return done(err);
 				}
