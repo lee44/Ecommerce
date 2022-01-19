@@ -23,7 +23,7 @@ const passportConfig = (passport) => {
 	passport.serializeUser(function (user, done) {
 		done(null, user.id);
 	});
-	// Extract the user id from session and search DB for user
+	// Extract the user id from session, search MongoDB for user, and attach a user property to the req object => req.user
 	passport.deserializeUser(function (id, done) {
 		User.findById(id, function (err, user) {
 			done(err, user);

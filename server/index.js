@@ -17,9 +17,16 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+	cors({
+		origin: "http://localhost:3000",
+		methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+		credentials: true,
+	})
+);
 
 app.set("trust proxy", 1);
+
 app.use(
 	session({
 		secret: process.env.SESSION_SECRET,
@@ -29,13 +36,19 @@ app.use(
 			mongoUrl: CONNECTION_URL,
 			touchAfter: 24 * 3600, //session can only be saved once every 24 hrs
 		}),
-		cookie: { secure: true, maxAge: 1000 * 60 * 60 * 24 },
+		cookie: { maxAge: 1000 * 60 * 60 * 24 },
 	})
 );
-
 passportConfig(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use((req, res, next) => {
+	console.log(req.session);
+	console.log(req.user);
+	next();
+});
+
 app.use("/api/processors", processorRouter);
 app.use("/api/auth", authRouter);
 app.use(cookieParser);

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Product } from "./typings/product";
 
 export const fetchProducts = createAsyncThunk("fetch/products", async (url: string): Promise<Product[]> => {
-	const response = await axios.get(url);
+	const response = await axios.get(url, { withCredentials: true });
 	const data = response.data;
 	return data;
 });
