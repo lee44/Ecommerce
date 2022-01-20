@@ -1,9 +1,24 @@
 import bcrypt from "bcryptjs";
-import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+const Schema = mongoose.Schema;
 
-const UserSchema = new mongoose.Schema({
+const Session = new Schema({
+	refreshToken: {
+		type: String,
+		default: "",
+	},
+});
+
+const UserSchema = new Schema({
+	firstName: {
+		type: String,
+		default: "",
+	},
+	lastName: {
+		type: String,
+		default: "",
+	},
 	username: {
 		type: String,
 		required: [true, "Please provide username"],
@@ -23,8 +38,17 @@ const UserSchema = new mongoose.Schema({
 		minlength: 6,
 		select: false,
 	},
-	resetPasswordToken: String,
-	resetPasswordExpire: Date,
+	authStrategy: {
+		type: String,
+		default: "local",
+	},
+	points: {
+		type: Number,
+		default: 50,
+	},
+	refreshToken: {
+		type: [Session],
+	},
 });
 
 /**
@@ -45,30 +69,22 @@ UserSchema.pre("save", async function (next) {
 /*
  * Mongoose allows adding an instance method to documents constructed from Models. Similar to a class having methods but Mongoose allows us to define our own
  */
-UserSchema.methods.matchPassword = async function (password) {
-	return await bcrypt.compare(password, this.password);
+UserSchema.methods.comparePassword = function (password) {
+	return bcrypt.compare(password, this.password);
 };
 
 /**
  * Returns a web token signed with users id
  */
-UserSchema.methods.getSignedJwtToken = function (expiresIn) {
-	return jwt.sign({ id: this._id }, process.env.JWT_SECRET, { expiresIn: expiresIn });
+UserSchema.methods.getSignedJwtToken = function () {
+	return jwt.sign({ id: this._id }, process.env.JWT_SECRET, { expiresIn: eval(process.env.SESSION_EXPIRY) });
 };
 
 /**
- * Returns a token used for resetting password
+ * Returns a web token signed with users id
  */
-UserSchema.methods.getResetPasswordToken = function () {
-	const resetToken = crypto.randomBytes(20).toString("hex");
-
-	// Hash token (private key) and save to database
-	this.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex");
-
-	// Set token expire date
-	this.resetPasswordExpire = Date.now() + 10 * (60 * 1000); // Ten Minutes
-
-	return resetToken;
+UserSchema.methods.getSignedRefreshToken = function () {
+	return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: eval(process.env.REFRESH_TOKEN_EXPIRY) });
 };
 
 const User = mongoose.model("User", UserSchema);
