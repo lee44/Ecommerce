@@ -13,10 +13,8 @@ export const passportLocalConfig = (passport) => {
 				}
 				const matching = await user.comparePassword(password);
 				if (!matching) {
-					console.log("Incorrect Password");
 					return done(null, false, { message: "Incorrect password." });
 				}
-
 				return done(null, user);
 			});
 		})
