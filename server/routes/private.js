@@ -1,9 +1,9 @@
 import express from "express";
+import passport from "passport";
 import { getPrivateRoute } from "../controllers/private.js";
-import { protect } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.get("/", protect, getPrivateRoute);
+router.get("/", passport.authenticate("jwt", { session: false }), getPrivateRoute);
 
 export default router;

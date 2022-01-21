@@ -77,14 +77,14 @@ UserSchema.methods.comparePassword = function (password) {
  * Returns a web token signed with users id
  */
 UserSchema.methods.getSignedJwtToken = function () {
-	return jwt.sign({ id: this._id }, process.env.JWT_SECRET, { expiresIn: eval(process.env.SESSION_EXPIRY) });
+	return jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: eval(process.env.SESSION_EXPIRY) });
 };
 
 /**
  * Returns a web token signed with users id
  */
 UserSchema.methods.getSignedRefreshToken = function () {
-	return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: eval(process.env.REFRESH_TOKEN_EXPIRY) });
+	return jwt.sign({ _id: this._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: eval(process.env.REFRESH_TOKEN_EXPIRY) });
 };
 
 const User = mongoose.model("User", UserSchema);

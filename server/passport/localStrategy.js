@@ -9,7 +9,7 @@ export const passportLocalConfig = (passport) => {
 					return done(err);
 				}
 				if (!user) {
-					return done(null, false, { message: "Incorrect username." });
+					return done(null, false, { message: "Incorrect email." });
 				}
 				const matching = await user.comparePassword(password);
 				if (!matching) {
