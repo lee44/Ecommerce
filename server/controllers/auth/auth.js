@@ -54,6 +54,31 @@ export const login = (req, res, next) => {
 	})(req, res, next);
 };
 
+export const logout = (req, res, next) => {
+	const { signedCookies = {} } = req;
+	const { refreshToken } = signedCookies;
+	User.findById(req.user._id).then(
+		(user) => {
+			const tokenIndex = user.refreshToken.findIndex((item) => item.refreshToken === refreshToken);
+
+			if (tokenIndex !== -1) {
+				user.refreshToken.id(user.refreshToken[tokenIndex]._id).remove();
+			}
+
+			user.save((err, user) => {
+				if (err) {
+					res.statusCode = 500;
+					res.send(err);
+				} else {
+					res.clearCookie("refreshToken", cookieOptions);
+					res.send({ success: true });
+				}
+			});
+		},
+		(err) => next(err)
+	);
+};
+
 export const refreshToken = (req, res, next) => {
 	// req.signedCookies["refreshToken"] equivalent to the below two lines
 	const { signedCookies = {} } = req;
