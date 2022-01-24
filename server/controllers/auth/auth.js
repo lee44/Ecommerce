@@ -8,6 +8,15 @@ import { sendEmail } from "../../utils/sendEmail.js";
 
 dotenv.config();
 
+/**
+ * * Important information is highlighted
+ * ! Deprecated
+ * ? Put a question here
+ * TODO: Put any task here
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
 export const register = async (req, res, next) => {
 	const { username, email, password } = req.body;
 	try {
@@ -21,7 +30,7 @@ export const register = async (req, res, next) => {
 		await user.save();
 
 		res.cookie("refreshToken", refreshToken, cookieOptions);
-		res.send({ success: true, token });
+		res.send({ success: true, username: username, token: token });
 	} catch (err) {
 		next(err);
 	}
@@ -47,7 +56,7 @@ export const login = (req, res, next) => {
 					await user.save();
 
 					res.cookie("refreshToken", refreshToken, cookieOptions);
-					res.send({ success: true, token });
+					res.send({ success: true, username: user.username, token: token });
 				} catch (error) {
 					return next(error);
 				}

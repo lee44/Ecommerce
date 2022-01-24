@@ -1,15 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { ENDPOINTS } from "../config/Endpoints/endpoints";
 import { FormInput } from "../pages/Login/Login";
 
-export const fetchTokens = createAsyncThunk("fetch/token", async (formData: FormInput) => {
-	const response = await axios.post(ENDPOINTS.LOGIN, formData);
-	return response.data;
-});
+const config: AxiosRequestConfig = {
+	headers: { "Content-Type": "application/json" },
+	withCredentials: true,
+};
 
-export const fetchAccessToken = createAsyncThunk("fetch/accessToken", async () => {
-	const response = await axios.get(ENDPOINTS.ACCESSTOKEN, { withCredentials: true });
+export const fetchJWTToken = createAsyncThunk("fetch/JWTtoken", async (formData: FormInput) => {
+	const response = await axios.post(ENDPOINTS.LOGIN, formData, config);
+
 	return response.data;
 });
 
@@ -23,21 +24,17 @@ const initialState = {
 const userSlice = createSlice({
 	name: "user",
 	initialState: initialState,
-	reducers: {
-		deleteToken(state,action) => {
-			
-		}
-	},
+	reducers: {},
 	extraReducers(builder) {
-		builder.addCase(fetchTokens.pending, (state, action) => {
+		builder.addCase(fetchJWTToken.pending, (state, action) => {
 			state.status = "loading";
 		});
-		builder.addCase(fetchTokens.fulfilled, (state, action) => {
+		builder.addCase(fetchJWTToken.fulfilled, (state, action) => {
 			state.status = "succeeded";
 			state.username = action.payload.username;
-			state.token = action.payload.access_token;
+			state.token = action.payload.token;
 		});
-		builder.addCase(fetchTokens.rejected, (state, action) => {
+		builder.addCase(fetchJWTToken.rejected, (state, action) => {
 			state.status = "failed";
 		});
 	},

@@ -14,14 +14,15 @@ type FormInput = {
 };
 
 const defaultValues = {
-	username: "",
-	email: "",
-	password: "",
-	confirmPassword: "",
+	username: "jlee",
+	email: "jlee7772@gmail.com",
+	password: "123456",
+	confirmPassword: "123456",
 };
 
 const config: AxiosRequestConfig = {
 	headers: { "Content-Type": "application/json" },
+	withCredentials: true,
 };
 
 const Register = () => {
@@ -38,7 +39,8 @@ const Register = () => {
 	const onSubmit = async (formData: FormInput) => {
 		try {
 			const { data } = await axios.post("/api/auth/register", formData, config);
-			// localStorage.setItem("authToken", data.token);
+			console.log(data);
+
 			history.push("/");
 		} catch (error) {}
 	};

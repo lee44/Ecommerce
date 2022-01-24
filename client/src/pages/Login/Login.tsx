@@ -6,7 +6,7 @@ import { useHistory } from "react-router";
 import * as Yup from "yup";
 import { InputText } from "../../components/Form/InputText";
 import { useAppDispatch } from "../../redux/hooks";
-import { fetchTokens } from "../../redux/userSlice";
+import { fetchJWTToken } from "../../redux/userSlice";
 
 export type FormInput = {
 	email: string;
@@ -30,7 +30,7 @@ const Login = () => {
 	const { handleSubmit, control } = useForm<FormInput>({ defaultValues: defaultValues, resolver: yupResolver(validationSchema) });
 	const onSubmit = (formData: FormInput) => {
 		try {
-			dispatch(fetchTokens(formData));
+			dispatch(fetchJWTToken(formData));
 			history.push("/");
 		} catch (error) {
 			setError("Invalid email and password");

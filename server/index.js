@@ -17,7 +17,13 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+	//To allow requests from client
+	origin: ["http://localhost:3000"],
+	credentials: true,
+	exposedHeaders: ["set-cookie"],
+};
+app.use(cors(corsOptions));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use("/api/processors", processorRouter);
